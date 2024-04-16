@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+</head>
+<body>
+    <h1>Resultado</h1>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>N</th>
+            <th>xn</th>
+            <th>fm</th>
+            <th>E</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(length) %}
+            <tr>
+                <td>{{ N[i] }}</td>
+                <td>{{ xn[i] }}</td>
+                <td>{{ fm[i] }}</td>
+                <td>{{ E[i] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      
+</body>
+</html>
