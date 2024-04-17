@@ -1,6 +1,10 @@
 import os
 import matlab.engine
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
+
+separador = os.path.sep 
+dir_actual = os.path.dirname(os.path.abspath(__file__))
+dir = separador.join(dir_actual.split(separador)[:-1])+'\matlab'
 
 eng = matlab.engine.start_matlab()
 
@@ -17,7 +21,7 @@ def punto_fijo():
             tol = float(request.form['tol'])
             niter = int(request.form['niter'])
             
-            eng.addpath(r'C:\Users\Eve\Desktop\Proyecto_Análisis\matlab')
+            eng.addpath(dir)
             [N, xn, fm, E]= eng.pf(f, g, x, tol, niter, nargout=4)
             N, xn, fm, E = list(N[0]), list(xn[0]), list(fm[0]), list(E[0])
             length = len(N)
