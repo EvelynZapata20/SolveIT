@@ -5,23 +5,24 @@ separador = os.path.sep
 dir_actual = os.path.dirname(os.path.abspath(__file__))
 dir = separador.join(dir_actual.split(separador)[:-1])+'\matlab'
 
-def biseccion(func, xi, xs, Tol, niter):
+def biseccion(f, xi, xs, tol, niter):
     eng = matlab.engine.start_matlab()
     eng.addpath(dir)
-    T, s, E, fm = eng.Biseccion(func, xi, xs, Tol, niter, nargout=4)
+    r, N, xn, fm, E = eng.biseccion(f, xi, xs, tol, niter, nargout=5)
     eng.quit()
-    return T, s, E, fm
+    return r, N, xn, fm, E
 
 if __name__ == "__main__":
-    func = 'log(sin(x)^2 + 1)-(1/2)'
-    xi = 0
-    xs = 1
+    func = 'x^2 - 4^x - 10'
+    xi = -5
+    xs = 5
     Tol = 1e-6
     niter = 100
 
-    T, s, E, fm = biseccion(func, xi, xs, Tol, niter)
+    r, N, xn, fm, E = biseccion(func, xi, xs, Tol, niter)
 
-    print("T:", T)
-    print("s:", s)
-    print("E:", E)
+    print("r:", r)
+    print("N:", N)
+    print("xn:", xn)
     print("fm:", fm)
+    print("E:", E)
