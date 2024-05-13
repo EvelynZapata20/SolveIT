@@ -112,6 +112,78 @@ def descargar_archivo_raicesm():
     archivo_path = os.path.join(dir_tables, 'multiple_roots_results.xlsx')
     return send_file(archivo_path, as_attachment=True)
 
+@app.route('/secante', methods=['GET', 'POST'])
+def secante():
+    if request.method == 'POST':
+            f= str(request.form['f']) 
+            x0 = float(request.form['x0'])
+            x1 = float(request.form['x1'])  
+            tol = float(request.form['tol'])
+            Terror = int(request.form['Terror'])
+            niter = int(request.form['niter'])
+            
+            eng.addpath(dir_matlab)
+
+            respuesta = eng.secante(f, x0, x1, tol, niter, Terror)
+            df = pd.read_csv('tables/tabla_secante.csv')
+            df = df.astype(str)
+            data = df.to_dict(orient='records')
+
+            # Lee el archivo CSV
+            df = pd.read_csv('tables/tabla_secante.csv')
+            # Escribe los datos en un nuevo archivo Excel
+            df.to_excel('tables/tabla_secante.xlsx', index=False) 
+
+            #Gráfica
+            imagen_path = '../static/grafica_secante.png'  # Ruta de la imagen
+            return render_template('resultado_secante.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
+        
+    return render_template('formulario_secante.html')
+
+@app.route('/secante/descargar', methods=['POST'])
+def descargar_archivo():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_secante.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
+
+@app.route('/rf', methods=['GET', 'POST'])
+def reglaFalsa():
+    if request.method == 'POST':
+            f= str(request.form['f']) 
+            x0 = float(request.form['x0'])
+            x1 = float(request.form['x1'])  
+            tol = float(request.form['tol'])
+            Terror = int(request.form['Terror'])
+            niter = int(request.form['niter'])
+            
+            eng.addpath(dir_matlab)
+
+            respuesta = eng.rf(f, x0, x1, tol, niter, Terror)
+            print(respuesta[0])
+            df = pd.read_csv('tables/tabla_reglaFalsa.csv')
+            df = df.astype(str)
+            data = df.to_dict(orient='records')
+
+            # Lee el archivo CSV
+            df = pd.read_csv('tables/tabla_reglaFalsa.csv')
+            # Escribe los datos en un nuevo archivo Excel
+            df.to_excel('tables/tabla_reglaFalsa.xlsx', index=False) 
+
+            #Gráfica
+            imagen_path = '../static/grafica_reglaFalsa.png'  # Ruta de la imagen
+            return render_template('resultado_reglaFalsa.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
+        
+    return render_template('formulario_reglaFalsa.html')
+
+@app.route('/rf/descargar', methods=['POST'])
+def descargar_archivorf():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_reglaFalsa.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
 
 
 # EJECUCIÓN
