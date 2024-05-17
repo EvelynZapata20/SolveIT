@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducir Matriz</title>
+    <!-- Incluir Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        input {
+            width: 40px;
+            text-align: center;
+        }
+
+        .error_text {
+            font-size: 15px;
+        }
+    </style>
+    <!-- Incluir jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body class="container mt-6">
+
+    <h2 class="text-center">Metodo de interpolación de Lagrange</h2>
+    
+    <p></p>
+    <p>Debes ingresar por lo menos dos puntos para la ejecución de este método</p>
+    <p>Nota: Intenta no utilizar puntos repetidos ya que esto podría generar resultados inesperados en el polinomio</p>
+
+    <!-- Formulario para definir el tamaño de la matriz -->
+    <form id="tamanioForm" class="form-inline mb-3">
+        <div class="form-group mr-2">
+            <label for="filas" class="mr-2">Cantidad de datos:</label>
+            <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" class="form-control" required>
+        </div>
+        <button type="button" onclick="generarVectorx(); generarVectory();" class="btn btn-primary">Generar</button>
+    </form>
+
+    <div class="row">
+        <div class="col-md-4">
+            <table id="vectorx" class="table table-bordered">
+                <h6>X</h6>
+                <!-- La tabla se generará dinámicamente con JavaScript -->
+            </table>
+        </div>
+        <div class="col-md-4">
+            <table id="vectory" class="table table-bordered">
+                <h6>Y</h6>
+                <!-- La tabla se generará dinámicamente con JavaScript -->
+            </table>
+        </div>
+    </div>
+
+    <button onclick='ejecutarMetodo();' class='btn btn-success'>Ejecutar Método</button>
+
+    <div id="respuestaDiv"></div>
+
+    <table class="table table-bordered" id="tablaDatos">
+        <thead>
+            <tr id="encabezado"></tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+ 
+    <script>
+        function generarVectorx() {
+            var filas = parseInt(document.getElementById("cantidadDatos").value);
+            var tabla = document.getElementById("vectorx");
+
+            // Limpiar la tabla
+            tabla.innerHTML = '';
+            var fila = tabla.insertRow(0);
+            for (var j = 0; j < filas; j++) {
+                var celda = fila.insertCell(j);
+                var input = document.createElement("input");
+                input.type = "number";
+                input.name = "dato[" + j + "]";
+                celda.appendChild(input);
+            }
+
+        }
+
+        function generarVectory() {
+            var filas = parseInt(document.getElementById("cantidadDatos").value);
+            var tabla = document.getElementById("vectory");
+
+            // Limpiar la tabla
+            tabla.innerHTML = '';
+            var fila = tabla.insertRow(0);
+            for (var j = 0; j < filas; j++) {
+                var celda = fila.insertCell(j);
+                var input = document.createElement("input");
+                input.type = "number";
+                input.name = "dato[" + j + "]";
+                celda.appendChild(input);
+            }
+        }
+
+
+        // Enviar los datos al servidor
+        function ejecutarMetodo() {
+            // Obtener los datos de los vectores x e y
+            var vectorx = [];
+            var vectory = [];
+            $("#vectorx input").each(function () {
+                vectorx.push(parseFloat($(this).val()));
+            });
+            $("#vectory input").each(function () {
+                vectory.push(parseFloat($(this).val()));
+            });
+
+            // Convertir los vectores a cadenas JSON
+            var vectorxJSON = JSON.stringify(vectorx);
+            var vectoryJSON = JSON.stringify(vectory);
+
+            // Enviar los datos al servidor
+            $.ajax({
+                type: "POST",
+                url: "/lagrange",
+                data: {
+                    vectorx: vectorxJSON,
+                    vectory: vectoryJSON
+                },
+                success: function (response) {
+                    // Manejar la respuesta del servidor
+                    $("#respuestaDiv").html(response);
+                },
+                error: function (xhr, status, error) {
+                    // Manejar errores de la solicitud
+                    console.error(error);
+                }
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
