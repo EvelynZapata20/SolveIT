@@ -1,4 +1,7 @@
-function [r, N, xn, E] = MatJacobiSeid(x0, A, b, et, Tol, niter)
+function [r, N, xn, E, re] = MatJacobiSeid(x0, A, b, et, Tol, niter)
+    disp(x0)
+    disp(A)
+    disp(b)
     x0 = eval(x0);
     A = eval(A);
     b = eval(b);
@@ -27,6 +30,7 @@ function [r, N, xn, E] = MatJacobiSeid(x0, A, b, et, Tol, niter)
     end
 
     if error < Tol
+        re = sprintf('Radio espectral de T= %f\n',Re)
         r = sprintf('%s Es una aproximación de la solución del sistema con una tolerancia= %f\n',xn{c}, Tol)
     else 
         r = sprintf('Fracasó en %f iteraciones\n', niter) 
