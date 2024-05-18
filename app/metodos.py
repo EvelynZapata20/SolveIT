@@ -381,8 +381,6 @@ def descargar_archivoNewtonInt():
     return send_file(archivo_path, as_attachment=True)
 
 
-<<<<<<< Updated upstream
-=======
 #Método de newton
 @app.route('/newton', methods=['GET', 'POST'])
 def newton():
@@ -519,7 +517,6 @@ def descargar_archivo_jacobi():
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
 
->>>>>>> Stashed changes
 # EJECUCIÓN
 if __name__ == '__main__':
     app.run(debug=True)
