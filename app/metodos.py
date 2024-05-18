@@ -2,6 +2,7 @@ import os
 import matlab.engine
 from flask import Flask, render_template, request, send_file,jsonify
 import pandas as pd
+import numpy as np
 import json
 import csv
 
@@ -44,9 +45,9 @@ def punto_fijo():
 
         imagen_path = os.path.join('static', 'grafica_pf.png')
 
-        return render_template('resultado_pf.html', r=r, N=N, xn=xn, fm=fm, E=E, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_pf.html', r=r, N=N, xn=xn, fm=fm, E=E, length=length, data=data, imagen_path=imagen_path)
 
-    return render_template('formulario_pf.html')
+    return render_template('Seccion_1/formulario_pf.html')
 
 @app.route('/pf/descargar', methods=['POST'])
 def descargar_archivo_pf():
@@ -75,9 +76,9 @@ def biseccion():
 
         imagen_path = os.path.join('static', 'grafica_biseccion.png')
 
-        return render_template('resultado_biseccion.html', r=r, N=N, xn=xn, fm=fm, E=E, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_biseccion.html', r=r, N=N, xn=xn, fm=fm, E=E, length=length, data=data, imagen_path=imagen_path)
 
-    return render_template('formulario_biseccion.html')
+    return render_template('Seccion_1/formulario_biseccion.html')
 
 @app.route('/biseccion/descargar', methods=['POST'])
 def descargar_archivo_biseccion():
@@ -107,9 +108,9 @@ def multiple_roots():
 
         imagen_path = os.path.join('static', 'grafica_multiple_roots.png')
 
-        return render_template('resultado_raicesm.html', data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_raicesm.html', data=data, imagen_path=imagen_path)
     
-    return render_template('formulario_raicesm.html')
+    return render_template('Seccion_1/formulario_raicesm.html')
 
 @app.route('/rm/descargar', methods=['POST'])
 def descargar_archivo_raicesm():
@@ -142,9 +143,9 @@ def secante():
 
         #Gráfica
         imagen_path = '../static/grafica_secante.png'  # Ruta de la imagen
-        return render_template('resultado_secante.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_secante.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
         
-    return render_template('formulario_secante.html')
+    return render_template('Seccion_1/formulario_secante.html')
 
 @app.route('/secante/descargar', methods=['POST'])
 def descargar_archivo():
@@ -181,9 +182,9 @@ def reglaFalsa():
 
         #Gráfica
         imagen_path = '../static/grafica_reglaFalsa.png'  # Ruta de la imagen
-        return render_template('resultado_reglaFalsa.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_reglaFalsa.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
         
-    return render_template('formulario_reglaFalsa.html')
+    return render_template('Seccion_1/formulario_reglaFalsa.html')
 
 @app.route('/rf/descargar', methods=['POST'])
 def descargar_archivorf():
@@ -218,9 +219,9 @@ def lagrange():
 
         # Gráfica
         imagen_path = '../static/grafica_lagrange.png'  # Ruta de la imagen
-        return render_template('resultado_lagrange.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_3/resultado_lagrange.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
         
-    return render_template('lagrange.html')
+    return render_template('Seccion_3/lagrange.html')
 
 @app.route('/lagrange/descargar', methods=['POST'])
 def descargar_archivoLagrange():
@@ -261,9 +262,9 @@ def newtonint():
 
         # Gráfica
         imagen_path = '../static/grafica_newtonint.png'  # Ruta de la imagen
-        return render_template('resultado_newtonint.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_3/resultado_newtonint.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
         
-    return render_template('newtonint.html')
+    return render_template('Seccion_3/newtonint.html')
 
 @app.route('/newtonint/descargar', methods=['POST'])
 def descargar_archivoNewtonInt():
@@ -300,9 +301,9 @@ def newton():
 
         #Gráfica
         imagen_path = '../static/grafica_newton.png'  # Ruta de la imagen
-        return render_template('resultado_newton.html', r=r, N=N, xn=xn, fm=fm, dfm=dfm, E=E, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_newton.html', r=r, N=N, xn=xn, fm=fm, dfm=dfm, E=E, length=length, data=data, imagen_path=imagen_path)
     
-    return render_template('formulario_newton.html')
+    return render_template('Seccion_1/formulario_newton.html')
 
 @app.route('/newton/descargar', methods=['POST'])
 def descargar_archivo_newton():
@@ -342,9 +343,9 @@ def gaussSeidel():
 
         #Gráfica
         imagen_path = '../static/grafica_gaussSeidel.png'  # Ruta de la imagen
-        return render_template('resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_2/resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, length=length, data=data, imagen_path=imagen_path)
     
-    return render_template('formulario_gaussSeidel.html')
+    return render_template('Seccion_2/formulario_gaussSeidel.html')
 
 @app.route('/gaussSeidel/descargar', methods=['POST'])
 def descargar_archivo_gaussSeidel():
@@ -353,6 +354,25 @@ def descargar_archivo_gaussSeidel():
 
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
+
+@app.route('/sor', methods=['GET', 'POST'])
+def sor():
+    x0 = '[0; 0; 0]'
+    A = '[4 -1 0; -1 4 -1; 0 -1 3]'
+    b = '[15; 10; 10]'  
+    Tol = 1e-6  # Tolerancia
+    niter = 100  # Número máximo de iteraciones
+    w = 1.2  # Factor de relajación
+    tipe = 'Cifras Significativas'  # Tipo de error
+
+    eng.addpath(dir_matlab)
+    # Llamar a la función SOR
+    [r, n, xi, E] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=4)
+    length = len(n)
+    print(r, n, xi, E, length)
+
+    # Renderizar la plantilla HTML con la tabla y el resultado
+    return render_template('Seccion_2/resultado_sor.html', resultado=r, n=n, xi=xi, E=E, length=length)
 
 # EJECUCIÓN
 if __name__ == '__main__':

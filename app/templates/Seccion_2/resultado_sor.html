@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOR Results</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOR Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Iteration (n)</th>
+                <th>Values of xi</th>
+                <th>Error E</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(length) %}
+            <tr>
+                <td>{{ n[i] }}</td>
+                <td>{{ xi[i] }}</td>
+                <td>{{ E[i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>{{ r }}</p>
+</body>
+</html>
