@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gauss Seidel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matriz.css') }}">
+</head>
+<body>
+    <div class="table-container">
+        <div class="tablas">
+            <div class="matrix">
+                <label for="A">A:</label><br>
+                <div id="matrixContainer"></div>
+            </div>
+
+            <div class="vector">
+                <label for="b">b:</label><br>
+                <div id="vectorContainer"></div>
+            </div>
+
+        </div>
+
+        <div class="controls">
+            <button id="decreaseSize">-</button>
+            <span id="matrixSize">1</span>
+            <button id="increaseSize">+</button>
+        </div>
+    </div>
+    <form action="/gaussSeidel" method="POST">
+        <input type="hidden" id="A" name="A">
+
+        <input type="hidden" id="b" name="b">
+
+        <label for="x">X0:</label><br>
+        <input type="text" id="x" name="x"><br><br>
+
+        <label for="et">Tipo de error:</label><br>
+        <select id="et" name="et">
+            <option value="Decimales Correctos">Error Absoluto</option>
+            <option value="Cifras Significativas">Error Relativo</option>
+        </select><br><br>
+
+        <label for="tol">Tolerancia:</label><br>
+        <input type="text" id="tol" name="tol"><br><br>
+
+        <label for="niter">Nº Iteraciones:</label><br>
+        <input type="text" id="niter" name="niter"><br><br>
+
+        <button type="submit" id="submitMatrix">Enviar</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/matriz.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.table-container {
+    text-align: center;
+    margin-right: 50px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+.controls span {
+    display: none;
+}
+
+.tablas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#matrixContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#vectorContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.matrix-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 2px;
+    box-sizing: border-box;
+}
+
+.vector-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 2px;
+    box-sizing: border-box;
+}
+
+.matrix {
+    margin-right: 30px;
+}

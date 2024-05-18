@@ -313,6 +313,47 @@ def descargar_archivo_newton():
     return send_file(archivo_path, as_attachment=True)
 
 
+#Método de Gauss-Seidel
+@app.route('/gaussSeidel', methods=['GET', 'POST'])
+def gaussSeidel():
+    if request.method == 'POST':
+        A = request.form['A']
+        b = str(request.form['b'])  
+        x = str(request.form['x']) 
+        et = str(request.form['et']) 
+        tol = float(request.form['tol'])
+        niter = int(request.form['niter'])
+        
+
+        eng.addpath(dir_matlab)
+        [r, N, xn, E] = eng.gaussSeidel(x ,A ,b ,et ,tol ,niter , nargout=4)
+        N, E = list(N[0]), list(E[0])
+        length = len(N)
+
+
+        df = pd.read_csv(os.path.join(dir_tables, 'tabla_gaussSeidel.csv'))
+        df = df.astype(str)
+        data = df.to_dict(orient='records')
+        df.to_excel(os.path.join(dir_tables, 'tabla_gaussSeidel.xlsx'), index=False) 
+
+        # Lee el archivo CSV
+
+        # Escribe los datos en un nuevo archivo Excel
+
+        #Gráfica
+        imagen_path = '../static/grafica_gaussSeidel.png'  # Ruta de la imagen
+        return render_template('resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, length=length, data=data, imagen_path=imagen_path)
+    
+    return render_template('formulario_gaussSeidel.html')
+
+@app.route('/gaussSeidel/descargar', methods=['POST'])
+def descargar_archivo_gaussSeidel():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_gaussSeidel.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
+
 # EJECUCIÓN
 if __name__ == '__main__':
     app.run(debug=True)
