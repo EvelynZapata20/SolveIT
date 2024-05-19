@@ -100,7 +100,7 @@ def multiple_roots():
         # Asume que multiple_roots retorna los valores necesarios o guarda los resultados en un archivo CSV
         eng.raices_multiples(fn, xi, tol, k, et, nargout=0)  # Ejecuta el cálculo en MATLAB
         
-        # Lee los resultados de un archivo CSV (asegúrate de que tu función MATLAB los guarde correctamente)
+        # Lee los resultados de un archivo CSV
         df = pd.read_csv(os.path.join(dir_tables, 'multiple_roots_results.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
@@ -296,6 +296,44 @@ def sor():
     return render_template('Seccion_2/resultado_sor.html', resultado=r, n=n, xi=xi, E=E, length=length)
 
 
+#Método de Jacobi
+@app.route('/jacobi', methods=['GET', 'POST'])
+def jacobi():
+    if request.method == 'POST':
+        A = request.form['A']
+        b = str(request.form['b'])  
+        x = str(request.form['x']) 
+        error_type = str(request.form['error_type']) 
+        tol = float(request.form['tol'])
+        niter = int(request.form['niter'])
+        
+
+        eng.addpath(dir_matlab)
+        [r, N, xn, E, Re] = eng.jacobi(x ,A ,b , tol ,niter , error_type, nargout=5)
+        N, E = list(N[0]), list(E[0])
+        length = len(N)
+
+        df = pd.read_csv(os.path.join(dir_tables, 'tabla_jacobi.csv'))
+        df = df.astype(str)
+        data = df.to_dict(orient='records')
+        df.to_excel(os.path.join(dir_tables, 'tabla_jacobi.xlsx'), index=False) 
+
+        imagen_path = os.path.join('static', 'grafica_jacobi.png')
+
+        return render_template('Seccion_2/resultado_jacobi.html', r=r, N=N, xn=xn, E=E, Re=Re, length=length, data=data, imagen_path=imagen_path)
+    
+    return render_template('Seccion_2/formulario_jacobi.html')
+
+
+@app.route('/jacobi/descargar', methods=['POST'])
+def descargar_archivo_jacobi():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_jacobi.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
+
+
 # -------------------------------------------------SECCIÓN 3----------------------------------------------------
 
 
@@ -379,7 +417,6 @@ def descargar_archivoNewtonInt():
 
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
-
 
 # EJECUCIÓN
 if __name__ == '__main__':
