@@ -296,6 +296,44 @@ def sor():
     return render_template('Seccion_2/resultado_sor.html', resultado=r, n=n, xi=xi, E=E, length=length)
 
 
+#Método de Jacobi
+@app.route('/jacobi', methods=['GET', 'POST'])
+def jacobi():
+    if request.method == 'POST':
+        A = request.form['A']
+        b = str(request.form['b'])  
+        x = str(request.form['x']) 
+        error_type = str(request.form['error_type']) 
+        tol = float(request.form['tol'])
+        niter = int(request.form['niter'])
+        
+
+        eng.addpath(dir_matlab)
+        [r, N, xn, E, Re] = eng.jacobi(x ,A ,b , tol ,niter , error_type, nargout=5)
+        N, E = list(N[0]), list(E[0])
+        length = len(N)
+
+        df = pd.read_csv(os.path.join(dir_tables, 'tabla_jacobi.csv'))
+        df = df.astype(str)
+        data = df.to_dict(orient='records')
+        df.to_excel(os.path.join(dir_tables, 'tabla_jacobi.xlsx'), index=False) 
+
+        imagen_path = os.path.join('static', 'grafica_jacobi.png')
+
+        return render_template('Seccion_2/resultado_jacobi.html', r=r, N=N, xn=xn, E=E, Re=Re, length=length, data=data, imagen_path=imagen_path)
+    
+    return render_template('Seccion_2/formulario_jacobi.html')
+
+
+@app.route('/jacobi/descargar', methods=['POST'])
+def descargar_archivo_jacobi():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_jacobi.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
+
+
 # -------------------------------------------------SECCIÓN 3----------------------------------------------------
 
 
@@ -376,143 +414,6 @@ def newtonint():
 def descargar_archivoNewtonInt():
     # Ruta del archivo que se va a descargar
     archivo_path = 'tables/tabla_newtonInt.xlsx'
-
-    # Enviar el archivo al cliente para descargar
-    return send_file(archivo_path, as_attachment=True)
-
-
-#Método de newton
-@app.route('/newton', methods=['GET', 'POST'])
-def newton():
-    if request.method == 'POST':
-        f= str(request.form['f']) 
-        x = float(request.form['x'])  
-        tol = float(request.form['tol'])
-        niter = int(request.form['niter'])
-
-        eng.addpath(dir_matlab)
-        [r, N, xn, fm, dfm, E] = eng.newton(f, x, tol, niter, nargout=6)
-        N, xn, fm, dfm, E = list(N[0]), list(xn[0]), list(fm[0]), list(dfm[0]), list(E[0])
-        length = len(N)
-
-
-        df = pd.read_csv(os.path.join(dir_tables, 'tabla_newton.csv'))
-        df = df.astype(str)
-        data = df.to_dict(orient='records')
-        df.to_excel(os.path.join(dir_tables, 'tabla_newton.xlsx'), index=False) 
-
-        # Lee el archivo CSV
-
-        # Escribe los datos en un nuevo archivo Excel
-
-        #Gráfica
-        imagen_path = '../static/grafica_newton.png'  # Ruta de la imagen
-        return render_template('Seccion_1/resultado_newton.html', r=r, N=N, xn=xn, fm=fm, dfm=dfm, E=E, length=length, data=data, imagen_path=imagen_path)
-    
-    return render_template('Seccion_1/formulario_newton.html')
-
-@app.route('/newton/descargar', methods=['POST'])
-def descargar_archivo_newton():
-    # Ruta del archivo que se va a descargar
-    archivo_path = 'tables/tabla_newton.xlsx'
-
-    # Enviar el archivo al cliente para descargar
-    return send_file(archivo_path, as_attachment=True)
-
-
-#Método de Gauss-Seidel
-@app.route('/gaussSeidel', methods=['GET', 'POST'])
-def gaussSeidel():
-    if request.method == 'POST':
-        A = request.form['A']
-        b = str(request.form['b'])  
-        x = str(request.form['x']) 
-        et = str(request.form['et']) 
-        tol = float(request.form['tol'])
-        niter = int(request.form['niter'])
-        
-
-        eng.addpath(dir_matlab)
-        [r, N, xn, E] = eng.gaussSeidel(x ,A ,b ,et ,tol ,niter , nargout=4)
-        N, E = list(N[0]), list(E[0])
-        length = len(N)
-
-
-        df = pd.read_csv(os.path.join(dir_tables, 'tabla_gaussSeidel.csv'))
-        df = df.astype(str)
-        data = df.to_dict(orient='records')
-        df.to_excel(os.path.join(dir_tables, 'tabla_gaussSeidel.xlsx'), index=False) 
-
-        # Lee el archivo CSV
-
-        # Escribe los datos en un nuevo archivo Excel
-
-        #Gráfica
-        imagen_path = '../static/grafica_gaussSeidel.png'  # Ruta de la imagen
-        return render_template('Seccion_2/resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, length=length, data=data, imagen_path=imagen_path)
-    
-    return render_template('Seccion_2/formulario_gaussSeidel.html')
-
-@app.route('/gaussSeidel/descargar', methods=['POST'])
-def descargar_archivo_gaussSeidel():
-    # Ruta del archivo que se va a descargar
-    archivo_path = 'tables/tabla_gaussSeidel.xlsx'
-
-    # Enviar el archivo al cliente para descargar
-    return send_file(archivo_path, as_attachment=True)
-
-@app.route('/sor', methods=['GET', 'POST'])
-def sor():
-    x0 = '[0; 0; 0]'
-    A = '[4 -1 0; -1 4 -1; 0 -1 3]'
-    b = '[15; 10; 10]'  
-    Tol = 1e-6  # Tolerancia
-    niter = 100  # Número máximo de iteraciones
-    w = 1.2  # Factor de relajación
-    tipe = 'Cifras Significativas'  # Tipo de error
-
-    eng.addpath(dir_matlab)
-    # Llamar a la función SOR
-    [r, n, xi, E] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=4)
-    length = len(n)
-    print(r, n, xi, E, length)
-
-    # Renderizar la plantilla HTML con la tabla y el resultado
-    return render_template('Seccion_2/resultado_sor.html', resultado=r, n=n, xi=xi, E=E, length=length)
-
-#Método de Jacobi
-@app.route('/jacobi', methods=['GET', 'POST'])
-def jacobi():
-    if request.method == 'POST':
-        A = request.form['A']
-        b = str(request.form['b'])  
-        x = str(request.form['x']) 
-        error_type = str(request.form['error_type']) 
-        tol = float(request.form['tol'])
-        niter = int(request.form['niter'])
-        
-
-        eng.addpath(dir_matlab)
-        [r, N, xn, E] = eng.jacobi(x ,A ,b , error_type, tol ,niter , nargout=4)
-        N, E = list(N[0]), list(E[0])
-        length = len(N)
-
-        df = pd.read_csv(os.path.join(dir_tables, 'tabla_jacobi.csv'))
-        df = df.astype(str)
-        data = df.to_dict(orient='records')
-        df.to_excel(os.path.join(dir_tables, 'tabla_jacobi.xlsx'), index=False) 
-
-        imagen_path = os.path.join('static', 'grafica_jacobi.png')
-
-        return render_template('Seccion_2/resultado_jacobi.html', r=r, N=N, xn=xn, E=E, length=length, data=data, imagen_path=imagen_path)
-    
-    return render_template('Seccion_2/formulario_jacobi.html')
-
-
-@app.route('/jacobi/descargar', methods=['POST'])
-def descargar_archivo_jacobi():
-    # Ruta del archivo que se va a descargar
-    archivo_path = 'tables/tabla_jacobi.xlsx'
 
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
