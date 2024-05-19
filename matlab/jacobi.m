@@ -1,4 +1,4 @@
-function [r, N, xn, E] = MatJacobi(x0,A,b,Tol,niter,error_type)
+function [r, N, xn, E, Re] = MatJacobi(x0,A,b,Tol,niter,error_type)
     x0 = eval(x0);
     A = eval(A);
     b = eval(b);
@@ -8,11 +8,15 @@ function [r, N, xn, E] = MatJacobi(x0,A,b,Tol,niter,error_type)
     L=-tril(A,-1);
     U=-triu(A,+1);
     N(c+1) = c;
+    Tr=inv(D)*(L+U);
+    C=inv(D)*b;
+
+    autovalores = eig(Tr);
+    calculo_re = max(abs(autovalores));
+    Re = sprintf('Radio espectral: %f', calculo_re);
 
     while error>Tol && c<niter
-        T=inv(D)*(L+U);
-        C=inv(D)*b;
-        x1=T*x0+C;
+        x1=Tr*x0+C;
 
         if strcmp(error_type, 'Error Absoluto')
             E(c+1)=norm(x1-x0,'inf');
@@ -34,8 +38,14 @@ function [r, N, xn, E] = MatJacobi(x0,A,b,Tol,niter,error_type)
     end
 
     T = table(N', xn', E', 'VariableNames', {'Iteration', 'xn', 'E'});
-    csv_file_path = "app/tables/tabla_jacobi.csv";
-    writetable(T, csv_file_path)
+
+    currentDir = fileparts(mfilename('fullpath'));
+    tablesDir = fullfile(currentDir, '..', 'app', 'tables');
+    if ~exist(tablesDir, 'dir')
+        mkdir(tablesDir);
+    end
+    csvFilePath = fullfile(tablesDir, 'tabla_jacobi.csv');
+    writetable(T, csvFilePath);
     
 
     % Crear la figura para visualizar la matriz A, el vector solución x, y el vector b
@@ -77,10 +87,39 @@ function [r, N, xn, E] = MatJacobi(x0,A,b,Tol,niter,error_type)
         text(posX, posY, mat2str(b(i, :)), 'FontSize', 12, 'Color', 'red');
         posY = posY - 0.05;
     end
+
+    % Mostrar el vector solución C
+    posY = 0.8;
+    posX = posX + tamano;   
+    text(posX-0.1, posY, 'C', 'FontSize', 12, 'FontWeight', 'bold', 'Color', 'black');
+    posY = posY - 0.05;
+    for i = 1:size(x1, 1)
+        text(posX-0.1, posY, sprintf('%.4f', C(i, :)), 'FontSize', 12, 'Color', 'green');
+        posY = posY - 0.05;
+    end
+
+    % Mostrar la matriz de Transicion
+    text(posX-0.5, posY-0.05, 'T', 'FontSize', 12, 'FontWeight', 'bold', 'Color', 'black');
+    posY = posY - 0.1;
+    for i = 1:size(Tr, 1)
+        text(posX-0.5, posY, mat2str(Tr(i, :)), 'FontSize', 12, 'Color', 'blue');
+        posY = posY - 0.05;
+        tamano = tamano + 0.1;
+    end
+
     
+
+
     % Guardar la figura como PNG
-    saveas(fig, 'app/static/grafica_gaussSeidel.png');
+    currentDir = fileparts(mfilename('fullpath'));
+    staticDir = fullfile(currentDir, '..', 'app', 'static');
+    if ~exist(staticDir, 'dir')
+        mkdir(staticDir);  % Crea el directorio si no existe
+    end
+    imgPath = fullfile(staticDir, 'grafica_jacobi.png');
+    img = getframe(gcf);
+    imwrite(img.cdata, imgPath);
+    hold off;
     close(fig);
 
 end
-
