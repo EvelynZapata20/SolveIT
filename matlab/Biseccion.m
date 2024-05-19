@@ -1,6 +1,6 @@
 %Bisección: se ingresa el valor inicial y final del intervalo (xi, xs), la tolerancia del error (Tol) y el màximo nùmero de iteraciones (niter) 
 
-function [r, N, xn, fm, E] = biseccion(f_str, xi, xs, Tol, niter)
+function [r, N, xn, fm, E] = biseccion(f_str, xi, xs, Tol, niter, tipe)
     f = str2func(['@(x)' f_str]);
 
     fi = eval(subs(f, xi));
@@ -36,7 +36,11 @@ function [r, N, xn, fm, E] = biseccion(f_str, xi, xs, Tol, niter)
             fe = fm(N + 2);
             N_list(N + 2) = N + 1; 
             xn_list(N + 2) = xm; 
-            E(N + 2) = abs(xm - xa);
+            if strcmp(tipe, 'Cifras Significativas')
+                E(N + 2) = abs(xm - xa)/abs(xm);
+            else
+                E(N + 2) = abs(xm - xa);
+            end
             error = E(N + 2);
             N = N + 1;
         end

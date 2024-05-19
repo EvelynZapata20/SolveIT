@@ -1,4 +1,4 @@
-function [r, N, xn, fm, E] = pf(f_str, g_str, x0, Tol, niter)
+function [r, N, xn, fm, E] = pf(f_str, g_str, x0, Tol, niter, tipe)
     f = str2func(['@(x)' f_str]);
     g = str2func(['@(x)' g_str]);
     
@@ -14,7 +14,11 @@ function [r, N, xn, fm, E] = pf(f_str, g_str, x0, Tol, niter)
         xn(c+2) = g(x0);
         fm(c+2) = f(xn(c+2));
         fe = fm(c+2);
-        E(c+2) = abs(xn(c+2) - x0);
+        if strcmp(tipe, 'Cifras Significativas')
+            E(c+2) = abs(xn(c+2) - x0)/abs(xn(c+2));
+        else
+            E(c+2) = abs(xn(c+2) - x0);
+        end
         error = E(c+2);
         x0 = xn(c+2);
         N(c+2) = c+1;

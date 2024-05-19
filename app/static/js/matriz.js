@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     let matrixSize = 2;
-    const maxSize = 8; // Tamaño máximo de la matriz
+    const maxSize = 6; // Tamaño máximo de la matriz
     const matrixSizeDisplay = document.getElementById('matrixSize');
     const matrixContainer = document.getElementById('matrixContainer');
     const vectorContainer = document.getElementById('vectorContainer');

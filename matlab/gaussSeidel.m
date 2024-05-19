@@ -1,4 +1,4 @@
-function [r, N, xn, E, re] = MatJacobiSeid(x0, A, b, et, Tol, niter)
+function [r, N, xn, E, re] = gaussSeidel(x0, A, b, et, Tol, niter)
     disp(x0)
     disp(A)
     disp(b)

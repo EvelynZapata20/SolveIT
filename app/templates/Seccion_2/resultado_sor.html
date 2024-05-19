@@ -4,41 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOR Results</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
 </head>
 <body>
-    <h1>SOR Results</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Iteration (n)</th>
-                <th>Values of xi</th>
-                <th>Error E</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in range(length) %}
-            <tr>
-                <td>{{ n[i] }}</td>
-                <td>{{ xi[i] }}</td>
-                <td>{{ E[i] }}</td>
-            </tr>
+    <div class="table-container">
+        <h1>SOR</h1>
+        <p>
+            {% for val in xi[length-1] %}
+            {{ val }}{% if not loop.last %}, {% endif %}
             {% endfor %}
-        </tbody>
-    </table>
-    <p>{{ r }}</p>
+            {{ r }}
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">N</th>
+                    <th colspan="{{ xi[0]|length }}">Valores de xi</th>
+                    <th rowspan="2">E</th>
+                </tr>
+                <tr>
+                    {% for i in range(xi[0]|length) %}
+                    <th>x{{ i + 1 }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(length) %}
+                <tr>
+                    <td>{{ n[i] }}</td>
+                    {% for val in xi[i] %}
+                    <td>{{ val }}</td>
+                    {% endfor %}
+                    <td>{{ E[i] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <form action="gaussSeidel/descargar" method="post">
+            <button type="submit">Descargar</button>
+        </form>
+    </div>
+
+    <div class="image-container">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+                <img src="{{ imagen_path }}" alt="Imagen">
+                <p>{{radio}}</p>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>

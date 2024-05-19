@@ -2,20 +2,17 @@ h1, p{
     text-align: center;
 }
 
-.table-container {
-    float: left;
-    width: 50%;
-    margin-right: 20px;
-}
-
-.img-container {
-    float: right;
-    width: 50%;
+img-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 100vh;           
 }
 
 .img-container img {
     max-width: 50%;
     height: auto;
+    margin: auto; 
 }
 
 table {

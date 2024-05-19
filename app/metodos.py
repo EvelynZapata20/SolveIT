@@ -33,8 +33,9 @@ def punto_fijo():
         x = float(request.form['x'])  
         tol = float(request.form['tol'])
         niter = int(request.form['niter'])
+        tipe= str(request.form['tipe'])
         
-        [r, N, xn, fm, E] = eng.pf(f, g, x, tol, niter, nargout=5)
+        [r, N, xn, fm, E] = eng.pf(f, g, x, tol, niter, tipe, nargout=5)
         N, xn, fm, E = list(N[0]), list(xn[0]), list(fm[0]), list(E[0])
         length = len(N)
 
@@ -64,8 +65,9 @@ def biseccion():
         xs = float(request.form['xs'])  
         tol = float(request.form['tol'])
         niter = int(request.form['niter'])
-        
-        [r, N, xn, fm, E] = eng.biseccion(f, xi, xs, tol, niter, nargout=5)
+        tipe= str(request.form['tipe'])
+
+        [r, N, xn, fm, E] = eng.biseccion(f, xi, xs, tol, niter, tipe, nargout=5)
         N, xn, fm, E = list(N[0]), list(xn[0]), list(fm[0]), list(E[0])
         length = len(N)
 
@@ -275,27 +277,6 @@ def descargar_archivo_gaussSeidel():
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
 
-#Método de sor
-@app.route('/sor', methods=['GET', 'POST'])
-def sor():
-    x0 = '[0; 0; 0]'
-    A = '[4 -1 0; -1 4 -1; 0 -1 3]'
-    b = '[15; 10; 10]'  
-    Tol = 1e-6  # Tolerancia
-    niter = 100  # Número máximo de iteraciones
-    w = 1.2  # Factor de relajación
-    tipe = 'Cifras Significativas'  # Tipo de error
-
-    eng.addpath(dir_matlab)
-    # Llamar a la función SOR
-    [r, n, xi, E] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=4)
-    length = len(n)
-    print(r, n, xi, E, length)
-
-    # Renderizar la plantilla HTML con la tabla y el resultado
-    return render_template('Seccion_2/resultado_sor.html', resultado=r, n=n, xi=xi, E=E, length=length)
-
-
 #Método de Jacobi
 @app.route('/jacobi', methods=['GET', 'POST'])
 def jacobi():
@@ -332,6 +313,45 @@ def descargar_archivo_jacobi():
 
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
+
+
+#Método de sor
+@app.route('/sor', methods=['GET', 'POST'])
+def sor():
+    if request.method == 'POST':
+        x0 = str(request.form['x'])
+        A = request.form['A']
+        b = str(request.form['b'])
+        Tol = float(request.form['tol'])
+        niter = int(request.form['niter'])
+        w = float(request.form['w'])
+        tipe = str(request.form['et']) 
+        
+        eng.addpath(dir_matlab)
+        # Llamar a la función SOR
+        [r, n, xi, E, radio] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=5)
+        n, E = list(n[0]), list(E[0])
+        xi = [[xi[j][i] for j in range(len(xi))] for i in range(len(xi[0]))]
+        length = len(n)
+
+        df = pd.read_csv(os.path.join(dir_tables, 'tabla_sor.csv'))
+        df = df.astype(str)
+        data = df.to_dict(orient='records')
+        df.to_excel(os.path.join(dir_tables, 'tabla_sor.xlsx'), index=False) 
+
+        imagen_path = '../static/grafica_sor.png'  # Ruta de la imagen
+        # Renderizar la plantilla HTML con la tabla y el resultado
+        return render_template('Seccion_2/resultado_sor.html', r=r, n=n, xi=xi, E=E, radio=radio, length=length, data=data, imagen_path=imagen_path)
+    return render_template('Seccion_2/formulario_sor.html')
+
+@app.route('/sor/descargar', methods=['POST'])
+def descargar_archivo_sor():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_sor.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)
+
 
 
 # -------------------------------------------------SECCIÓN 3----------------------------------------------------

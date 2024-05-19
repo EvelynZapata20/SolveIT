@@ -1,4 +1,4 @@
-function [r, N, xn, E, Re] = MatJacobi(x0,A,b,Tol,niter,error_type)
+function [r, N, xn, E, Re] = jacobi(x0,A,b,Tol,niter,error_type)
     x0 = eval(x0);
     A = eval(A);
     b = eval(b);

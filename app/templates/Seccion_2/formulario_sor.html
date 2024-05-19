@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOR</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matriz.css') }}">
+</head>
+<body>
+    <div class="table-container">
+        <div class="tablas">
+            <div class="matrix">
+                <label for="A">A:</label><br>
+                <div id="matrixContainer"></div>
+            </div>
+
+            <div class="vector">
+                <label for="b">b:</label><br>
+                <div id="vectorContainer"></div>
+            </div>
+
+            <div class="x">
+                <label for="x">X0:</label><br>
+                <div id="x0Container"></div>
+            </div>
+
+        </div>
+
+        <div class="controls">
+            <button id="decreaseSize">-</button>
+            <span id="matrixSize">1</span>
+            <button id="increaseSize">+</button>
+        </div>
+    </div>
+    <form action="/sor" method="POST">
+        <input type="hidden" id="A" name="A">
+
+        <input type="hidden" id="b" name="b">
+
+        <input type="hidden" id="x" name="x">
+
+        <label for="tol">Tolerancia:</label><br>
+        <input type="text" id="tol" name="tol"><br><br>
+
+        <label for="niter">Nº Iteraciones:</label><br>
+        <input type="text" id="niter" name="niter"><br><br>
+
+        <label for="w">w:</label><br>
+        <input type="text" id="w" name="w"><br><br>
+        
+        <label for="et">Tipo de Tolerancia:</label><br>
+        <select id="et" name="et">
+            <option value="Decimales Correctos">Decimales Correctos</option>
+            <option value="Cifras Significativas">Cifras Significativas</option>
+        </select><br><br>
+            
+
+        <button type="submit" id="submitMatrix">Enviar</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/matriz.js') }}"></script>
+</body>
+</html>
