@@ -1,36 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado.css') }}">
+    <title>Resultado Bisección</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_1.css') }}">
 </head>
+{% extends "base.html" %}
+
 <body>
-    <h1>Resultado</h1>
-    <p>{{r}}</p>
-    <div class="table-container">
-      <table border="1">
-          <thead>
-            <tr>
-              <th>N</th>
-              <th>xn</th>
-              <th>fm</th>
-              <th>E</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for i in range(length) %}
+    <main>
+      {% block content %}
+        <h1>Resultado de Bisección</h1>
+        <p>{{ r }}</p>
+        <div class="table-container">
+        <table border="1">
+            <thead>
               <tr>
-                  <td>{{ N[i] }}</td>
-                  <td>{{ xn[i] }}</td>
-                  <td>{{ fm[i] }}</td>
-                  <td>{{ E[i] }}</td>
+                <th>N</th>
+                <th>xn</th>
+                <th>fm</th>
+                <th>E</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <br>
+            </thead>
+            <tbody>
+              {% for i in range(length) %}
+                <tr>
+                    <td>{{ N[i] }}</td>
+                    <td>{{ xn[i] }}</td>
+                    <td>{{ fm[i] }}</td>
+                    <td>{{ E[i] }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <br>
       <form action="biseccion/descargar" method="post">
           <button type="submit">Descargar</button>
       </form>
@@ -43,5 +47,6 @@
         </div>
       </div>
     </div>
+    {% endblock %}
 </body>
 </html>

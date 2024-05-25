@@ -1,47 +1,64 @@
-<!DOCTYPE html>
-<html>
+
 <head>
-    <title>Mi página</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bienvenido a SolveIT{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
-<body>
-    <h1>Bienvenido a la página principal</h1>
+
+{% extends "base.html" %}
+{% block content %}
+    <h1>Bienvenido a SolveIT</h1>
     <p>Por favor, seleccione una opción:</p>
-    <h2>Sección 1:</h2>
-    <form action="/punto_fijo" method="GET">
-        <button type="submit">Punto Fijo</button>
-    </form>
-    <form action="/biseccion" method="GET">
-        <button type="submit">Biseccion</button>
-    </form>
-    <form action="/multiple_roots" method="GET">
-        <button type="submit">Raíces Múltiples </button>
-    </form>
-    <form action="/rf" method="GET">
-        <button type="submit">Regla Falsa </button>
-    </form>
-    <form action="/secante" method="GET">
-        <button type="submit">Secante </button>
-    </form>
-        <form action="/newton" method="GET">
-        <button type="submit">Newton </button>
-    </form>
-    <h2>Sección 2:</h2>
-    <form action="/gaussSeidel" method="GET">
-        <button type="submit">Gauss-Seidel </button>
-    </form>
-    <form action="/jacobi" method="GET">
-        <button type="submit">Jacobi </button>
-    </form>
-    <form action="/sor" method="GET">
-        <button type="submit">SOR </button>
-    </form>
-    <h2>Sección 3:</h2>
-    <form action="/lagrange" method="GET">
-        <button type="submit">Lagrange </button>
-    </form>
-    <form action="/newtonint" method="GET">
-        <button type="submit">Newton Interpolación</button>
-    </form>
-</body>
-</html>
+    
+    <section id="seccion1">
+        <h2>Sección 1:</h2>
+        <div class="forms-container">
+            <form action="/punto_fijo" method="GET">
+                <button type="submit">Punto Fijo</button>
+            </form>
+            <form action="/biseccion" method="GET">
+                <button type="submit">Bisección</button>
+            </form>
+            <form action="/multiple_roots" method="GET">
+                <button type="submit">Raíces Múltiples</button>
+            </form>
+            <form action="/rf" method="GET">
+                <button type="submit">Regla Falsa</button>
+            </form>
+            <form action="/secante" method="GET">
+                <button type="submit">Secante</button>
+            </form>
+            <form action="/newton" method="GET">
+                <button type="submit">Newton</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="seccion2">
+        <h2>Sección 2:</h2>
+        <div class="forms-container">
+            <form action="/gaussSeidel" method="GET">
+                <button type="submit">Gauss-Seidel</button>
+            </form>
+            <form action="/jacobi" method="GET">
+                <button type="submit">Jacobi</button>
+            </form>
+            <form action="/sor" method="GET">
+                <button type="submit">SOR</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="seccion3">
+        <h2>Sección 3:</h2>
+        <div class="forms-container">
+            <form action="/lagrange" method="GET">
+                <button type="submit">Lagrange</button>
+            </form>
+            <form action="/newtonint" method="GET">
+                <button type="submit">Newton Interpolación</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

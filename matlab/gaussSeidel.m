@@ -28,8 +28,8 @@ function [r, N, xn, E, re] = gaussSeidel(x0, A, b, et, Tol, niter)
         c = c + 1;
         xn{c} = mat2str(x1);
     end
-    
     Re=max(abs(eig(T)));
+    
     if error < Tol
         re = sprintf('Radio espectral de T= %f\n',Re)
         r = sprintf('%s Es una aproximación de la solución del sistema con una tolerancia= %f\n',xn{c}, Tol)

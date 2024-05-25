@@ -1,16 +1,86 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #ECF0F1;
+    color: #34495E;
     margin: 0;
 }
 
-.table-container {
-    text-align: center;
-    margin-right: 100px;
+/* Form Styles */
+.form-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 20px;
+    padding: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
+
+.left-section, .right-section {
+    width: 50%;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.left-section .tablas {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #34495E;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: small;
+    color: #34495E;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    background: #1ABC9C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+    display: block;
+    margin: 20px auto;
+}
+
+.form-group button:hover {
+    background: #16A085;
+}
+
+
 
 .controls {
     display: flex;
@@ -27,49 +97,28 @@ body {
 }
 
 .controls span {
-    display: none;
+    font-size: large;
+    margin: 0 10px;
 }
 
-.tablas{
+.matriz,
+.vector {
     display: flex;
-    align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 30px;
+
 }
 
-#matrixContainer {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#vectorContainer {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
+#matrixContainer,
+#vectorContainer,
 #x0Container {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
-.matrix-input {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    font-size: 1.2em;
-    margin: 2px;
-    box-sizing: border-box;
-}
-
-.vector-input {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    font-size: 1.2em;
-    margin: 2px;
-    box-sizing: border-box;
-}
-
+.matrix-input,
+.vector-input,
 .x-input {
     width: 50px;
     height: 50px;
@@ -78,12 +127,3 @@ body {
     margin: 2px;
     box-sizing: border-box;
 }
-
-.matrix {
-    margin-right: 30px;
-}
-
-.vector {
-    margin-right: 30px;
-}
-
