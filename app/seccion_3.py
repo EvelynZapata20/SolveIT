@@ -94,3 +94,39 @@ def descargar_archivoNewtonInt():
 
     # Enviar el archivo al cliente para descargar
     return send_file(archivo_path, as_attachment=True)
+
+
+@blueprint.route('/vandermonde', methods=['POST', 'GET'])
+def vandermonde():
+    if request.method == 'POST':
+    
+        x = json.loads(request.form['vectorx'])
+        y = json.loads(request.form['vectory'])
+        
+        eng.addpath(dir_matlab)
+        
+        matx = matlab.double(x)
+        maty = matlab.double(y)
+        
+        respuesta = eng.vander(matx, maty)
+        print("respuesta",respuesta)
+
+        df = pd.read_csv(os.path.join(dir_tables, 'pol_vandermonde.csv'))
+        polinomio = df['Polinomio'][0]
+          
+        data = df.to_dict(orient='records')
+        #print("data",data)
+
+        df.to_excel(os.path.join(dir_tables, 'pol_vandermonde.xlsx'), index=False) 
+
+        # Gráfica
+        imagen_path = os.path.join('static', 'grafica_vander.png')
+        return render_template('Seccion_3/resultado_vander.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
+        
+    return render_template('Seccion_3/vandermonde.html')
+
+@blueprint.route('/vandermonde/descargar', methods=['POST'])
+def descargar_polvander():
+    archivo_path = 'tables/pol_vandermonde.xlsx'
+
+    return send_file(archivo_path, as_attachment=True)
