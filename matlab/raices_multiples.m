@@ -1,4 +1,4 @@
-function [xi, errores] = multiple_roots(fn_str, xi, tol, k, et)
+function [xi, errores, resultado] = multiple_roots(fn_str, xi, tol, k, et)
     % Validar el tipo de error
     if ~ismember(et, {'Decimales Correctos', 'Cifras Significativas'})
         error('El tipo de error no es valido');
@@ -14,7 +14,7 @@ function [xi, errores] = multiple_roots(fn_str, xi, tol, k, et)
     % Inicializar variables
     errores = [];
     fnx = [];
-    xis = [];
+    xis = [xi];  % Inicializar con el valor inicial
     error = tol + 1;
     n = 0;
 
@@ -39,11 +39,47 @@ function [xi, errores] = multiple_roots(fn_str, xi, tol, k, et)
         end
 
         % Actualizar xi para la próxima iteración
-        xi = xi_1;
         errores = [errores, error];
-        fnx = [fnx,fxi];
-        xis = [xis,xi];
+        fnx = [fnx, fxi];
+        xis = [xis, xi_1];
+        
+        xi = xi_1;
         n = n + 1;
+
+        % Información de depuración en cada iteración
+        disp(['Iteración: ', num2str(n)]);
+        disp(['xi: ', num2str(xi)]);
+        disp(['xi_1: ', num2str(xi_1)]);
+        disp(['fxi: ', num2str(fxi)]);
+        disp(['error: ', num2str(error)]);
+        disp(['Longitud de xis: ', num2str(length(xis))]);
+        disp(['Longitud de fnx: ', num2str(length(fnx))]);
+        disp(['Longitud de errores: ', num2str(length(errores))]);
+    end
+
+    % Ajustar las longitudes de las listas al final del bucle si es necesario
+    if length(xis) > length(fnx)
+        xis(end) = [];
+    end
+
+    % Determinar el resultado final
+    if fxi == 0
+        resultado = sprintf('%f es raíz de f(x)\n', xi);
+    elseif error < tol
+        resultado = sprintf('%f es una aproximación de una raíz de f(x) con una tolerancia= %f\n', xi, tol);
+    else
+        resultado = sprintf('Fracasó en %d iteraciones\n', k);
+    end
+
+    % Depuración adicional
+    disp('Debug Info Final:');
+    disp(['Longitud de xis: ', num2str(length(xis))]);
+    disp(['Longitud de fnx: ', num2str(length(fnx))]);
+    disp(['Longitud de errores: ', num2str(length(errores))]);
+
+    % Verificar longitud de los vectores antes de graficar
+    if length(xis) ~= length(fnx) || length(fnx) ~= length(errores)
+        error('xis, fnx y errores deben tener la misma longitud antes de graficar.');
     end
 
     % Graficar resultados
@@ -67,16 +103,22 @@ function [xi, errores] = multiple_roots(fn_str, xi, tol, k, et)
     imwrite(img.cdata, imgPath);
     hold off;
     close(fig);
-    
-    
 
-    % Agregar registro final de la iteración si se necesita para CSV
-    resultados = [(1:n)', xis', fnx', errores'];
+    % Verificación de consistencia de dimensiones
+    if length(xis) == length(fnx) && length(fnx) == length(errores)
+        % Agregar registro final de la iteración si se necesita para CSV
+        resultados = [(1:length(xis))', xis', fnx', errores'];  % Ajustar (1:length(xis)) para incluir todas las iteraciones
+    else
+        disp('Debug Info Final:');  % Información de depuración
+        disp(['Longitud de xis: ', num2str(length(xis))]);
+        disp(['Longitud de fnx: ', num2str(length(fnx))]);
+        disp(['Longitud de errores: ', num2str(length(errores))]);
+        error('Las dimensiones de los arrays no son consistentes.');
+    end
 
     % Guardar los resultados en una tabla y en un archivo CSV
     T = table(resultados(:,1), resultados(:,2), resultados(:,3), resultados(:,4), ...
               'VariableNames', {'Iteración', 'xi', 'f(xi)', 'Error'});
-    currentDir = fileparts(mfilename('fullpath'));
     tablesDir = fullfile(currentDir, '..', 'app', 'tables');
     if ~exist(tablesDir, 'dir')
         mkdir(tablesDir);
@@ -84,3 +126,6 @@ function [xi, errores] = multiple_roots(fn_str, xi, tol, k, et)
     csvFilePath = fullfile(tablesDir, 'multiple_roots_results.csv');
     writetable(T, csvFilePath);
 end
+
+
+
