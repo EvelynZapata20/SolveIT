@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOR Results</title>
+    <title>Resultado SOR</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
 </head>
+{% extends "base.html" %}
+
 <body>
-    <div class="table-container">
-        <h1>SOR</h1>
+    {% block content %}
+    <h1>SOR</h1>
         <p>
             {% for val in xi[length-1] %}
             {{ val }}{% if not loop.last %}, {% endif %}
             {% endfor %}
             {{ r }}
         </p>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -46,15 +49,17 @@
         </form>
     </div>
 
-    <div class="image-container">
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <h1>Solución Sistema de Ecuaciones Ax=b</h1>
-                <img src="{{ imagen_path }}" alt="Imagen">
-                <p>{{radio}}</p>
+    <div class="result-container">
+        <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+        <div class="image-container">
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <img src="{{ imagen_path }}" alt="Imagen">
+                    <p>{{radio}}</p>
+                </div>
             </div>
-        </div>
+        </div>    
     </div>
-    
+    {% endblock %}
 </body>
 </html>

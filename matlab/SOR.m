@@ -108,7 +108,7 @@ end
 
 function [sizee, const] = calculate(b)
     switch b
-        case {2, 3}
+        case {1, 2, 3}
             sizee = 3;
             const = 0.15;  
         case 4

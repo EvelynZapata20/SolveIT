@@ -1,0 +1,67 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ECF0F1;
+    color: #34495E;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #34495E;
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #34495E;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #1ABC9C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+    display: block;
+    margin: 20px auto;
+}
+
+button:hover {
+    background: #16A085;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+
+table {
+    max-width: 100%;
+    border-collapse: collapse;
+    width: auto; /* Deja que la tabla tome el ancho necesario según su contenido */
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #34495E;
+    color: #fff;
+}

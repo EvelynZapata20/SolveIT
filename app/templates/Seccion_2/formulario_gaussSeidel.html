@@ -4,65 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gauss Seidel</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/matriz.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formulario_2.css') }}">
 </head>
-<body>
+
+<body class="matrix-body">
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
     <div class="form-container">
-        <div class="left-section">
-            <div class="tablas">
-                <div class="matrix">
-                    <label for="A">A:</label><br>
-                    <div id="matrixContainer"></div>
+        <div class= "title">
+            <h1>Método de Gauss Seidel</h1>
+            <p>Por favor, ingrese los siguientes datos:</p>
+        </div>    
+        <div class= "inf-container">
+            <div class="left-section">
+                <div class="tablas">
+                    <div class="matrix">
+                        <label for="A">A:</label>
+                        <div id="matrixContainer"></div>
+                    </div>
+
+                    <div class="vector">
+                        <label for="b">b:</label>
+                        <div id="vectorContainer"></div>
+                    </div>
+
+                    <div class="x">
+                        <label for="x">X0:</label>
+                        <div id="x0Container"></div>
+                    </div>
                 </div>
 
-                <div class="vector">
-                    <label for="b">b:</label><br>
-                    <div id="vectorContainer"></div>
-                </div>
-
-                <div class="x">
-                    <label for="x">X0:</label><br>
-                    <div id="x0Container"></div>
+                <div class="controls">
+                    <button id="decreaseSize">-</button>
+                    <span id="matrixSize">1</span>
+                    <button id="increaseSize">+</button>
                 </div>
             </div>
 
-            <div class="controls">
-                <button id="decreaseSize">-</button>
-                <span id="matrixSize">1</span>
-                <button id="increaseSize">+</button>
-            </div>
-        </div>
+            <div class="right-section">
+                <form action="/gaussSeidel" method="POST">
+                    <input type="hidden" id="A" name="A">
+                    <input type="hidden" id="b" name="b">
+                    <input type="hidden" id="x" name="x">
 
-        <div class="right-section">
-            <form action="/gaussSeidel" method="POST">
-                <input type="hidden" id="A" name="A">
-                <input type="hidden" id="b" name="b">
-                <input type="hidden" id="x" name="x">
+                    <div class="form-group">
+                        <label for="et">Tipo de error:</label>
+                        <select id="et" name="et">
+                            <option value="Decimales Correctos">Decimales Correctos</option>
+                            <option value="Cifras Significativas">Cifras Significativas</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="et">Tipo de error:</label>
-                    <select id="et" name="et">
-                        <option value="Decimales Correctos">Error Absoluto</option>
-                        <option value="Cifras Significativas">Error Relativo</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="tol">Tolerancia:</label>
+                        <input type="text" id="tol" name="tol">
+                    </div>
 
-                <div class="form-group">
-                    <label for="tol">Tolerancia:</label>
-                    <input type="text" id="tol" name="tol">
-                </div>
+                    <div class="form-group">
+                        <label for="niter">Nº Iteraciones:</label>
+                        <input type="text" id="niter" name="niter">
+                    </div>
 
-                <div class="form-group">
-                    <label for="niter">Nº Iteraciones:</label>
-                    <input type="text" id="niter" name="niter">
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" id="submitMatrix">Enviar</button>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <button type="submit" id="submitMatrix">Enviar</button>
+                    </div>
+                </form>
+            </div>    
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/matriz.js') }}"></script>
+</div>
+<script src="{{ url_for('static', filename='js/matriz.js') }}"></script>
+{% endblock %}
 </body>
 </html>

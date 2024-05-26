@@ -7,23 +7,21 @@
     <title>Resultado del Método de Lagrange</title>
     <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        /* Agrega estilos personalizados si es necesario */
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/resultado_3.css') }}">
 </head>
 
 <body class="container mt-6">
-    <h2 class="text-center">Resultado del Método de Lagrange</h2>
+    <h1 class="text-center">Resultado del Método de Lagrange</h1>
 
     <!-- Visualizar la respuesta obtenida del método -->
     <div class="mt-4">
-        <h4>Polinomio:</h4>
+        <h2>Polinomio:</h2>
         <p>{{ respuesta }}</p>
     </div>
 
     <!-- Mostrar la gráfica generada -->
     <div class="mt-4">
-        <h4>Gráfica del Método de Lagrange:</h4>
+        <h2>Gráfica del Método de Lagrange:</h2>
         <img src="{{ imagen_path }}" alt="Gráfica del Método de Lagrange" class="img-fluid">
     </div>
 

@@ -1,0 +1,145 @@
+.container {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ECF0F1;
+    color: #34495E;
+    margin: 0;
+}
+
+.form-container {
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    padding-bottom: 0px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+.title {
+    text-align: center;
+    color: #34495E;
+    margin-bottom: 20px;
+
+}
+
+.inf-container{
+    display: flex;
+}
+
+.left-section {
+    width: 70%;
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.right-section {
+    width: 30%;
+    padding: 20px;
+    margin-right: 20px;
+    font-size: medium;
+}
+
+.left-section .tablas {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+h1 {
+    text-align: center;
+    color: #34495E;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #34495E;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    background: #1ABC9C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+    display: block;
+    margin: 20px auto;
+}
+
+.form-group button:hover {
+    background: #16A085;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+.controls span {
+    font-size: large;
+    margin: 0 10px;
+}
+
+.matrix,
+.vector,
+.x {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    margin:0 20px; 
+}
+
+
+#matrixContainer,
+#vectorContainer,
+#x0Container {
+    margin: 20px 0;
+}
+
+.matrix-input,
+.vector-input,
+.x-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 2px;
+    box-sizing: border-box;
+}

@@ -7,42 +7,25 @@
     <title>Introducir Matriz</title>
     <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        table {
-            border-collapse: collapse;
-            margin: 20px;
-        }
-
-        td,
-        th {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        input {
-            width: 40px;
-            text-align: center;
-        }
-
-        .error_text {
-            font-size: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formulario_3.css') }}">
     <!-- Incluir jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 
 <body class="container mt-6">
+    {% extends "base.html" %}
+    {% block content %}
+    <div class= "form-container">
 
-    <h2 class="text-center">Metodo de interpolación de Lagrange</h2>
+    <h1 class="text-center">Metodo de interpolación de Lagrange</h1>
     
     <p></p>
     <p>Debes ingresar por lo menos dos puntos para la ejecución de este método</p>
     <p>Nota: Intenta no utilizar puntos repetidos ya que esto podría generar resultados inesperados en el polinomio</p>
 
     <!-- Formulario para definir el tamaño de la matriz -->
+    <div class="form">
     <form id="tamanioForm" class="form-inline mb-3">
         <div class="form-group mr-2">
             <label for="filas" class="mr-2">Cantidad de datos:</label>
@@ -50,19 +33,24 @@
         </div>
         <button type="button" onclick="generarVectorx(); generarVectory();" class="btn btn-primary">Generar</button>
     </form>
+    </div>
 
     <div class="row">
+        <div class="coordinate">
         <div class="col-md-4">
             <table id="vectorx" class="table table-bordered">
                 <h6>X</h6>
                 <!-- La tabla se generará dinámicamente con JavaScript -->
             </table>
         </div>
+        </div>  
+        <div class="coordinate">
         <div class="col-md-4">
             <table id="vectory" class="table table-bordered">
                 <h6>Y</h6>
                 <!-- La tabla se generará dinámicamente con JavaScript -->
             </table>
+        </div>
         </div>
     </div>
 
@@ -149,7 +137,7 @@
         }
 
     </script>
-
+    {% endblock %}
 </body>
 
 </html>

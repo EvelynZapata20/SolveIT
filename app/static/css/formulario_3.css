@@ -1,0 +1,92 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ECF0F1;
+    color: #34495E;
+    margin: 0;
+    padding: 20px;
+}
+
+.form-container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: x-large;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #34495E;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: medium;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn.btn-success,
+.btn.btn-primary {
+    background: #1ABC9C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn.btn-success:hover,
+.btn.btn-primary:hover {
+    background: #16A085;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.coordinate{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h6 {
+    text-align: center;
+}
+.error_text {
+    font-size: 15px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+input {
+    width: 30px;
+    text-align: center;
+}

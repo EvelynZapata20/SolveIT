@@ -78,7 +78,6 @@ function [r, N, xi, E, Re] = jacobi(x0, A, b, Tol, niter, error_type)
     % Mostrar el vector solución x
     posY = 1;
     posX = posX+0.06;  % Ajustar la posición en X después de la matriz A
-    posX1 = posX
     text(posX, posY, 'xn', 'FontSize', 8, 'FontWeight', 'bold', 'Color', 'black');
     posY = posY - 0.12;
     for i = 1:size(x1, 1)
@@ -99,6 +98,7 @@ function [r, N, xi, E, Re] = jacobi(x0, A, b, Tol, niter, error_type)
         text(posX, posY, bText, 'FontSize', 8, 'Color', 'red');
         posY = posY - 0.12;
     end
+
 
     % Guardar la figura como PNG
     staticDir = fullfile(currentDir, '..', 'app', 'static');
@@ -124,7 +124,7 @@ end
 
 function [sizee, const] = calculate(b)
     switch b
-        case {2, 3}
+        case {1, 2, 3}
             sizee = 3;
             const = 0.15;  
         case 4

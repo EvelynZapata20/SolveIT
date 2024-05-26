@@ -6,11 +6,13 @@
     <title>Resultado</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
 </head>
-<body>
+{% extends "base.html" %}
 
-  <div class="table-container">
+<body>
+    {% block content %}
     <h1>Resultado</h1>
     <p>{{r}}</p>
+    <div class="table-container">
     <table border="1">
       <thead>
         <tr>
@@ -30,20 +32,23 @@
       </tbody>
     </table>
     <br>
-    <p>{{Re}}</p>
-    <br>
-      <form action="gaussSeidel/descargar" method="post">
-          <button type="submit">Descargar</button>
-      </form>
+    <form action="gaussSeidel/descargar" method="post">
+      <button type="submit">Descargar</button>
+  </form>
   </div>
   
-  <div class="image-container">
-    <div class="row mt-4">
-      <div class="col-md 6">
-          <img src="{{ imagen_path }}" alt="Imagen">
+  <div class="result-container">
+    <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+    <div class="image-container">
+      <div class="row mt-4">
+        <div class="col-md 6">
+            <img src="{{ imagen_path }}" alt="Imagen">
+            <p>{{Re}}</p>
+        </div>
       </div>
     </div>
   </div>
+  {% endblock %}
       
 </body>
 </html>

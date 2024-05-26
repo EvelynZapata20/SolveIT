@@ -5,28 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jacobi Results</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
-    <style>
-        .text-center {
-            text-align: center;
-        }
-        .img-fluid {
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
 </head>
+{% extends "base.html" %}
+
 <body>
-    <div class="table-container">
+    {% block content %}
         <h1>Resultado</h1>
-        <p>{{ Re }}</p>
         <p>
             {% for val in xn[-1] %}
             {{ val }}{% if not loop.last %}, {% endif %}
             {% endfor %}
             {{ r }}
         </p>
+        <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -58,14 +49,17 @@
         </form>
     </div>
 
-    <div class="image-container">
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <h1>Solución Sistema de Ecuaciones Ax=b</h1>
-                <img src="{{ imagen_path }}" alt="Imagen" class="img-fluid">
+    <div class="result-container">
+        <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+        <div class="image-container">
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <img src="{{ imagen_path }}" alt="Imagen">
+                    <p>{{ Re }}</p>
+                </div>
             </div>
         </div>
     </div>
-    
+    {% endblock %}
 </body>
 </html>
