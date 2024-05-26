@@ -30,16 +30,16 @@ def lagrange():
         respuesta = eng.lagrange(matx, maty)
         print("respuesta",respuesta)
 
-        df = pd.read_csv('tables/tabla_lagrange.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_lagrange.csv'))
         polinomio = df['Polinomio'][0]
           
         data = df.to_dict(orient='records')
         #print("data",data)
 
-        df.to_excel('tables/tabla_lagrange.xlsx', index=False)
+        df.to_excel(os.path.join(dir_tables,'tabla_lagrange.xlsx'), index=False)
 
         # Gráfica
-        imagen_path = '../static/grafica_lagrange.png'  # Ruta de la imagen
+        imagen_path = os.path.join('static','grafica_lagrange.png')  # Ruta de la imagen
         return render_template('Seccion_3/resultado_lagrange.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
         
     return render_template('Seccion_3/lagrange.html')
@@ -69,20 +69,20 @@ def newtonint():
         respuesta = eng.Newtonint(matx, maty)
         print("respuesta",respuesta)
 
-        df = pd.read_csv('tables/tabla_polnewton.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_polnewton.csv'))
         polinomio = df['Polinomio'][0]
           
-        data = pd.read_csv('tables/tabla_newtonint.csv')
+        data = pd.read_csv(os.path.join(dir_tables,'tabla_newtonint.csv'))
 
         # Escribe los datos en un nuevo archivo Excel
-        data.to_excel('tables/tabla_newtonint.xlsx', index=False) 
+        data.to_excel(os.path.join(dir_tables,'tabla_newtonint.xlsx'), index=False) 
 
-        with open('tables/tabla_newtonint.csv', 'r') as file:
+        with open(os.path.join(dir_tables,'tabla_newtonint.csv'), 'r') as file:
             csv_reader = csv.reader(file)
             data = list(csv_reader)
 
         # Gráfica
-        imagen_path = '../static/grafica_newtonint.png'  # Ruta de la imagen
+        imagen_path = os.path.join('static','grafica_newtonint.png')  # Ruta de la imagen
         return render_template('Seccion_3/resultado_newtonint.html',respuesta=polinomio, data=data, imagen_path=imagen_path)
         
     return render_template('Seccion_3/newtonint.html')

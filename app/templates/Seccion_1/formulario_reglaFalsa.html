@@ -1,33 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Regla Falsa</title>
+    <title>{% block title %}Regla Falsa{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/formulario_1.css') }}">
 </head>
+
+{% extends "base.html" %}
+{% block content %}
 <body>
-    <form action="/rf" method="post">
-        <label for="f">f:</label><br>
-        <input type="text" id="f" name="f"><br><br>
+    <div class="form-container">
+        <h1>Método de Regla Falsa</h1>
+        <p>Por favor, ingrese los siguientes datos:</p>
 
-        <label for="x0">x0:</label><br>
-        <input type="text" id="g" name="x0"><br><br>
+        <form action="/rf" method="post">
+            <div>
+                <label for="f">f:</label>
+                <input type="text" id="f" name="f">
+            </div>
+            
+            <div>
+                <label for="xi">xi:</label>
+                <input type="text" id="g" name="x0">
+            </div>
+            
+            <div>
+                <label for="xs">xs:</label>
+                <input type="text" id="x" name="x1">
+            </div>
+            
+            <div>
+                <label for="tol">Tolerancia:</label>
+                <input type="text" id="tol" name="tol">
+            </div>
+            
+            <div>
+                <label for="niter">Nº Iteraciones:</label>
+                <input type="text" id="niter" name="niter">
+            </div>
+            
+            <div>
+                <label for="Terror">Tipo de Tolerancia:</label>
+                <select id="Terror" name="Terror">
+                    <option value="Decimales Correctos">Decimales Correctos</option>
+                    <option value="Cifras Significativas">Cifras Significativas</option>
+                </select>
+            </div>
 
-        <label for="x1">x1:</label><br>
-        <input type="text" id="x" name="x1"><br><br>
+            <input type="submit" value="Enviar">   
 
-        <label for="tol">Tolerancia:</label><br>
-        <input type="text" id="tol" name="tol"><br><br>
-
-        <label for="Terror">Tipo tolerancia:</label><br>
-        <input type="text" id="niter" name="Terror"><br><br>
-
-        <label for="niter">Nº Iteraciones:</label><br>
-        <input type="text" id="niter" name="niter"><br><br>
-
-        <input type="submit" value="Enviar">
     </form>
-    
 </body>
+{% endblock %}
 </html>
 

@@ -119,23 +119,23 @@ def secante():
         x0 = float(request.form['x0'])
         x1 = float(request.form['x1'])  
         tol = float(request.form['tol'])
-        Terror = int(request.form['Terror'])
+        Terror = str(request.form['Terror'])
         niter = int(request.form['niter'])
         
         eng.addpath(dir_matlab)
 
         respuesta = eng.secante(f, x0, x1, tol, niter, Terror)
-        df = pd.read_csv('tables/tabla_secante.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_secante.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
 
         # Lee el archivo CSV
-        df = pd.read_csv('tables/tabla_secante.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_secante.csv'))
         # Escribe los datos en un nuevo archivo Excel
-        df.to_excel('tables/tabla_secante.xlsx', index=False) 
+        df.to_excel(os.path.join(dir_tables,'tabla_secante.xlsx'), index=False) 
 
         #Gráfica
-        imagen_path = '../static/grafica_secante.png'  # Ruta de la imagen
+        imagen_path = os.path.join('static','grafica_secante.png')  # Ruta de la imagen
         return render_template('Seccion_1/resultado_secante.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
         
     return render_template('Seccion_1/formulario_secante.html')
@@ -157,24 +157,24 @@ def reglaFalsa():
         x0 = float(request.form['x0'])
         x1 = float(request.form['x1'])  
         tol = float(request.form['tol'])
-        Terror = int(request.form['Terror'])
+        Terror = str(request.form['Terror'])
         niter = int(request.form['niter'])
         
         eng.addpath(dir_matlab)
 
         respuesta = eng.rf(f, x0, x1, tol, niter, Terror)
         print(respuesta[0])
-        df = pd.read_csv('tables/tabla_reglaFalsa.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_reglaFalsa.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
 
         # Lee el archivo CSV
-        df = pd.read_csv('tables/tabla_reglaFalsa.csv')
+        df = pd.read_csv(os.path.join(dir_tables,'tabla_reglaFalsa.csv'))
         # Escribe los datos en un nuevo archivo Excel
-        df.to_excel('tables/tabla_reglaFalsa.xlsx', index=False) 
+        df.to_excel(os.path.join(dir_tables,'tabla_reglaFalsa.xlsx'), index=False) 
 
         #Gráfica
-        imagen_path = '../static/grafica_reglaFalsa.png'  # Ruta de la imagen
+        imagen_path = os.path.join('static','grafica_reglaFalsa.png')  # Ruta de la imagen
         return render_template('Seccion_1/resultado_reglaFalsa.html',respuesta=respuesta, data=data,imagen_path=imagen_path)
         
     return render_template('Seccion_1/formulario_reglaFalsa.html')

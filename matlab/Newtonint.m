@@ -29,10 +29,16 @@ function [Tabla] = Newtonint(x, y)
         pol = pol + coef(i+1) * acum; %subtermino de polinomio de newton: pn(x) = b0 + b1(x-x0)+...+bn(x-x0)(x-x1)...(x-xn-1)
     end
     
+    currentDir = fileparts(mfilename('fullpath'));
+    
+    tablesDir = fullfile(currentDir, '..', 'app', 'tables');
+    mkdir(tablesDir);
+    cd(tablesDir);
+
     % Mostrar la tabla de diferencias divididas
     disp('Tabla de diferencias divididas de Newton:');
     disp(Tabla);
-    csv_file_path = "tables/tabla_newtonint.csv";
+    csv_file_path = fullfile(tablesDir, 'tabla_newtonint.csv');
     
     % Guardar la tabla con decimales
     writetable(array2table(Tabla), csv_file_path, 'Delimiter', ',', 'WriteVariableNames', false);
@@ -60,7 +66,11 @@ function [Tabla] = Newtonint(x, y)
     grid on
     
     % Guardar la gráfica en un archivo PNG
+
     img = getframe(gcf);
-    imwrite(img.cdata, './static/grafica_newtonInt.png');
+    staticDir = fullfile(currentDir, '..', 'app', 'static');
+    mkdir(staticDir);
+    imgPath = fullfile(staticDir, 'grafica_newtonInt.png');
+    imwrite(img.cdata, imgPath);
     hold off;
 end

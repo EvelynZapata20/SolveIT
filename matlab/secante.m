@@ -26,7 +26,7 @@ function [respuesta,N,XN,fm, E] = secante(func,x0,x1,Tol,niter,Terror)
             fe=fm(c+3);
 
           
-            if Terror == 0
+            if strcmp(Terror, 'Decimales Correctos')
                 E(c+3)=abs(xm-xn);
             else
                 E(c+3)=abs((xm-xn)/xm);
@@ -55,8 +55,12 @@ function [respuesta,N,XN,fm, E] = secante(func,x0,x1,Tol,niter,Terror)
 
         end
 
+        currentDir = fileparts(mfilename('fullpath'));
+        tablesDir = fullfile(currentDir, '..', 'app', 'tables');
+        mkdir(tablesDir);
+        cd(tablesDir);
         T = table(N', XN', fm', E', 'VariableNames', {'Iteration', 'xn', 'fxn', 'E'});
-        csv_file_path = "tables/tabla_secante.csv";
+        csv_file_path = fullfile(tablesDir, 'tabla_secante.csv');
         writetable(T, csv_file_path)
 
         fig = figure('Visible', 'off');
@@ -64,8 +68,12 @@ function [respuesta,N,XN,fm, E] = secante(func,x0,x1,Tol,niter,Terror)
         hold on
         yline(0);
         plot(xplot,eval(subs(f,xplot)));
+
         img = getframe(gcf);
-        imwrite(img.cdata, './static/grafica_secante.png');
+        staticDir = fullfile(currentDir, '..', 'app', 'static');
+        mkdir(staticDir);
+        imgPath = fullfile(staticDir, 'grafica_secante.png');
+        imwrite(img.cdata, imgPath);
 
         hold off
         close(fig);

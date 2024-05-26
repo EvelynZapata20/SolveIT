@@ -22,7 +22,14 @@ function [pol] = lagrange(vectorx, vectory)
     polinomio_sym = poly2sym(pol, x);
     polinomio_str = char(polinomio_sym);
     tabla = table({polinomio_str}, 'VariableNames', {'Polinomio'});
-    csv_file_path = 'tables/tabla_lagrange.csv';
+
+    currentDir = fileparts(mfilename('fullpath'));
+    
+    tablesDir = fullfile(currentDir, '..', 'app', 'tables');
+    mkdir(tablesDir);
+    cd(tablesDir);
+
+    csv_file_path = fullfile(tablesDir, 'tabla_lagrange.csv');
     writetable(tabla, csv_file_path);
 
     % Crear un conjunto de puntos para graficar el polinomio
@@ -37,6 +44,10 @@ function [pol] = lagrange(vectorx, vectory)
     ylabel('y');
     legend('Polinomio de Lagrange', 'Puntos de entrada');
     grid on;
+
     img = getframe(gcf);
-    imwrite(img.cdata, './static/grafica_lagrange.png');
+    staticDir = fullfile(currentDir, '..', 'app', 'static');
+    mkdir(staticDir);
+    imgPath = fullfile(staticDir, 'grafica_lagrange.png');
+    imwrite(img.cdata, imgPath);
 end

@@ -50,7 +50,7 @@ function [respuesta] = ReglaFalsa(func,x0,x1,Tol,niter,Terror)
             xm(c+2)=(p*xi(c+2)-fi(c+2))/p;
             fm(c+2)=eval(subs(f,xm(c+2)));
             fe=fm(c+2);
-            if Terror==0
+            if strcmp(Terror, 'Decimales Correctos')
                 E(c+2)=abs(xm(c+2)-xm(c+1));
             else
                 E(c+2)=abs((xm(c+2)-xm(c+1))/xm(c+2));
@@ -77,15 +77,26 @@ function [respuesta] = ReglaFalsa(func,x0,x1,Tol,niter,Terror)
         respuesta=sprintf('El intervalo es inadecuado')         
         T = table(-1, VariableNames=["intervalo"]);
     end
-    csv_file_path = "tables/tabla_reglaFalsa.csv";
-        writetable(T, csv_file_path)
+
+    currentDir = fileparts(mfilename('fullpath'));
+
+    tablesDir = fullfile(currentDir, '..', 'app', 'tables');
+    mkdir(tablesDir);
+    cd(tablesDir);
+    csv_file_path = fullfile(tablesDir, 'tabla_reglaFalsa.csv');
+    writetable(T, csv_file_path)
+
     fig = figure('Visible', 'off');
     xplot=((xm(c+1)-2):0.1:(xm(c+1)+2));
     hold on
     yline(0);
     plot(xplot,eval(subs(f,xplot)));
-   img = getframe(gcf);
-        imwrite(img.cdata, './static/grafica_reglaFalsa.png');
+
+    img = getframe(gcf);
+    staticDir = fullfile(currentDir, '..', 'app', 'static');
+    mkdir(staticDir);
+    imgPath = fullfile(staticDir, 'grafica_reglaFalsa.png');
+    imwrite(img.cdata, imgPath);
     hold off
     close(fig);
 end
