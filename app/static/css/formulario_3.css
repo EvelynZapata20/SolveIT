@@ -36,6 +36,7 @@ p {
     align-items: center;
 }
 
+button,
 .btn.btn-success,
 .btn.btn-primary {
     background: #1ABC9C;
@@ -49,6 +50,7 @@ p {
     margin: 20px auto;
 }
 
+button:hover,
 .btn.btn-success:hover,
 .btn.btn-primary:hover {
     background: #16A085;

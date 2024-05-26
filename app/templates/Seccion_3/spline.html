@@ -7,138 +7,56 @@
     <title>Introducir Matriz</title>
     <!-- Incluir Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.2;
-            background-color: #ECF0F1;
-            color: #34495E;
-        }
-        h2 {
-            font-size: xx-larger;
-            margin-bottom: 10px;
-            color: #34495E;
-            text-align: center;
-        }
-
-        p {
-            font-size: medium;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        table {
-            border-collapse: collapse;
-            margin: 20px;
-        }
-
-        td,
-        th {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        input {
-            width: 40px;
-            text-align: center;
-        }
-
-        .error_text {
-            font-size: 15px;
-        }
-
-        select {
-            width: 40px;
-        }
-        .container {
-            padding: 20px;
-            max-width: 1400px;
-            margin: 20px auto;
-            background: #FFFFFF;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        .form-inline {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-        .row {
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .col-md-4 {
-            margin-right: 200px;
-            margin-bottom: 50px;
-        }
-        button {
-            background: #1ABC9C;
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: medium;
-        }
-
-        button:hover {
-            background: #16A085;
-        }
-        .enviar {
-            text-align: center;
-            margin-top: 70px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/formulario_3.css') }}">
+    
     <!-- Incluir jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-{% extends "base.html" %}
-{% block content %}
 <body>
+    {% extends "base.html" %}
+    {% block content %}
     <div class="container mt-6">
+        <div class= "form-container">
         
-        <h2 class="text-center">Metodo de Spline</h2>
+        <h1 class="text-center">Metodo de Spline</h1>
         
         <p></p>
         <p>Debes ingresar por lo menos dos puntos para la ejecución de este método</p>
         <p>Nota: Intenta no utilizar puntos repetidos ya que esto podría generar resultados inesperados en el polinomio</p>
 
         <!-- Formulario para definir el tamaño de la matriz -->
-        <form id="tamanioForm" class="form-inline mb-3">
-            <div class="form-group mr-2">
-                <label for="filas" class="mr-2">Cantidad de datos:</label>
-                <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" class="form-control" required>
-            </div>
-            <button type="button" onclick="generarVectorx(); generarVectory();" class="button">Generar</button>
-        </form>
+        <div class="form">
+            <form id="tamanioForm" class="form-inline mb-3">
+                <div class="form-group mr-2">
+                    <label for="filas" class="mr-2">Cantidad de datos:</label>
+                    <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" class="form-control" required>
+                </div>
+                <button type="button" onclick="generarVectorx(); generarVectory();" class="button">Generar</button>
+            </form>
+        </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <table id="vectorx" class="table table-bordered">
-                    <h6>X</h6>
-                    <!-- La tabla se generará dinámicamente con JavaScript -->
-                </table>
+            <div class="coordinate">
+                <div class="col-md-4">
+                    <table id="vectorx" class="table table-bordered">
+                        <h6>X</h6>
+                        <!-- La tabla se generará dinámicamente con JavaScript -->
+                    </table>
+                </div>
             </div>
-            <div class="col-md-4">
-                <table id="vectory" class="table table-bordered">
-                    <h6>Y</h6>
-                    <!-- La tabla se generará dinámicamente con JavaScript -->
-                </table>
+            <div class="coordinate">
+                <div class="col-md-4">
+                    <table id="vectory" class="table table-bordered">
+                        <h6>Y</h6>
+                        <!-- La tabla se generará dinámicamente con JavaScript -->
+                    </table>
+                </div>
             </div>
             
         </div>
 
+        <div class= "form">
         <form id="grado_spline" class="form-inline mb-3">
             <div class="form-group mr-2">
                 <label for="gs" class="mr-2">Grado del trazador:</label><br>
@@ -149,6 +67,7 @@
                 </select><br><br>
             </div>
         </form>
+        </div>
         
         <form action="/spline" method="POST" class="enviar">
             <input type="hidden" id="x" name="x">

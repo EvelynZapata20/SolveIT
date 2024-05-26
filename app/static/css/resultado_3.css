@@ -51,9 +51,10 @@ img{
 table {
     max-width: 100%;
     border-collapse: collapse;
-    width: auto; /* Deja que la tabla tome el ancho necesario según su contenido */
-    margin: 0 auto; /* Centra la tabla horizontalmente */
+    width: auto; 
+    margin: 0 auto; 
     border: 1px solid #ddd;
+    
 }
 th, td {
     padding: 10px;
@@ -62,6 +63,16 @@ th, td {
 }
 
 th {
-    background-color: #34495E;
+    background-color: #1ABC9C;
     color: #fff;
 }
+
+.table-container{
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    padding-bottom: 0px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    }
