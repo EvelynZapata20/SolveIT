@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Método Spline</title>
+    <!-- Incluir Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.2;
+            background-color: #ECF0F1;
+            color: #34495E;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        h1 {
+            font-size: xx-large;
+            margin-bottom: 25px;
+            color: #34495E;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: larger;
+            margin-bottom: 10px;
+            color: #34495E;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: larger;
+            margin-bottom: 10px;
+            color: #34495E;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #1ABC9C;
+            color: white;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        button {
+            background: #1ABC9C;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: medium;
+            margin-bottom: 40px;
+        }
+
+        button:hover {
+            background: #16A085;
+        }
+    </style>
+</head>
+{% extends "base.html" %}
+{% block content %}
+<body>
+    <div class="container mt-6">
+        <h1 class="text-center">Resultado del Método Spline</h1>
+
+        <h2>P(x)</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    {% for i in range(g) if i < g %}
+                        <th>X{{ grado[i] }}</th>
+                    {% endfor %}
+                    <th>--</th>
+                    <th>Rango</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in respuesta %}
+                <tr>
+                    {% for value in p %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                    <th>{{ x[loop.index0] }} ≤ x ≤ {{ x[loop.index0+1] }} </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Mostrar la gráfica generada -->
+        <div class="mt-4">
+            <h4>Gráfica del Método Spline:</h4>
+            <img src="{{ imagen_path }}" alt="Gráfica del Método Spline" class="img-fluid">
+        </div>
+
+        <h2>Descargar Polinomio</h2>
+        <form action="spline/descargar" method="post">
+            <div class="button-container">
+                <button type="submit">Descargar</button>
+            </div>
+            
+        </form>
+    </div>
+    
+
+    <!-- Incluir jQuery y Bootstrap JS si es necesario -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+{% endblock %}
+</html>

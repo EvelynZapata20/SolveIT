@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado de Regla Falsa</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_1.css') }}">
 </head>
+{% extends "base.html" %}
 <body>
+    {% block content %}
     <h1>Resultado de Regla Falsa</h1>
     <p>Respuesta: {{ respuesta }}</p>
     <h2>Tabla de Resultados</h2>
@@ -48,5 +51,6 @@
     <form action="rf/descargar" method="post">
         <button type="submit">Descargar</button>
     </form>
+    {% endblock %}
 </body>
 </html>

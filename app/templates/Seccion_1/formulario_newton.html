@@ -3,25 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newton</title>
+    <title>{% block title %} Newton {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/formulario_1.css') }}">
 </head>
+{% extends "base.html" %}
+{% block content %}
 <body>
-    <div class="table container">
+    <div class="form-container">
+        <h1>Método de Newton</h1>
+        <p>Por favor, ingrese los siguientes datos:</p>
         <form action="/newton" method="post">
-            <label for="f">f:</label><br>
-            <input type="text" id="f" name="f"><br><br>
-    
-            <label for="x">X0:</label><br>
-            <input type="text" id="x" name="x"><br><br>
-    
-            <label for="tol">Tolerancia:</label><br>
-            <input type="text" id="tol" name="tol"><br><br>
-    
-            <label for="niter">Nº Iteraciones:</label><br>
-            <input type="text" id="niter" name="niter"><br><br>
+            <div>
+                <label for="f">f:</label>
+                <input type="text" id="f" name="f">
+            </div>
+            
+            <div>
+                <label for="x">X0:</label>
+                <input type="text" id="x" name="x">
+            </div>
+            
+            <div>
+                <label for="tol">Tolerancia:</label>
+                <input type="text" id="tol" name="tol">
+            </div>
+            
+            <div>
+                <label for="niter">Nº Iteraciones:</label>
+                <input type="text" id="niter" name="niter">
+            </div>
+
+            <div>
+                <label for="et">Tipo de error:</label>
+                <select id="et" name="et">
+                    <option value="Decimales Correctos">Decimales Correctos</option>
+                    <option value="Cifras Significativas">Cifras Significativas</option>
+                </select>
+            </div>
     
             <input type="submit" value="Enviar">
         </form>
 
 </body>
+{% endblock %}
 </html>

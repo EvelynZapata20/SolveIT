@@ -195,9 +195,10 @@ def newton():
         x = float(request.form['x'])  
         tol = float(request.form['tol'])
         niter = int(request.form['niter'])
+        et = str(request.form['et'])
 
         eng.addpath(dir_matlab)
-        [r, N, xn, fm, dfm, E] = eng.newton(f, x, tol, niter, nargout=6)
+        [r, N, xn, fm, dfm, E] = eng.newton(f, x, tol, niter, et, nargout=6)
         N, xn, fm, dfm, E = list(N[0]), list(xn[0]), list(fm[0]), list(dfm[0]), list(E[0])
         length = len(N)
 

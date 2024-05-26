@@ -130,3 +130,46 @@ def descargar_polvander():
     archivo_path = 'tables/pol_vandermonde.xlsx'
 
     return send_file(archivo_path, as_attachment=True)
+
+
+@blueprint.route('/spline', methods=['POST', 'GET'])
+def spline():
+    if request.method == 'POST':
+        
+        x = request.form['x']
+        y = request.form['y']
+        d = int(request.form['d'])
+        
+        eng.addpath(dir_matlab)
+        
+        respuesta = eng.spline(x, y, d)
+        print("respuesta",respuesta)
+
+        df = pd.read_csv(os.path.join(dir_tables, 'tabla_spline.csv'))
+        df = df.astype(str)
+        data = df.to_dict(orient='records')
+        df.to_excel(os.path.join(dir_tables, 'tabla_spline.xlsx'), index=False) 
+
+        imagen_path = os.path.join('static', 'grafica_spline.png')
+
+        # Eliminar los corchetes al principio y al final del string
+        x = x.strip("[]")
+        # Dividir el string usando la coma como separador
+        x = x.split(',')
+        g = d
+        grado = []
+        while d > 0:
+            grado.append(d)
+            d = d - 1
+
+        return render_template('Seccion_3/resultado_spline.html',respuesta=respuesta, data=data, imagen_path=imagen_path, x=x, grado = grado, g=g)
+        
+    return render_template('Seccion_3/spline.html')
+
+@blueprint.route('/spline/descargar', methods=['POST'])
+def descargar_archivoSpline():
+    # Ruta del archivo que se va a descargar
+    archivo_path = 'tables/tabla_spline.xlsx'
+
+    # Enviar el archivo al cliente para descargar
+    return send_file(archivo_path, as_attachment=True)

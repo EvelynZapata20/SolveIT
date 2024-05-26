@@ -1,4 +1,4 @@
-function [r, N, xn, fm, dfm, E] = newton(f_str, x0, Tol, niter)
+function [r, N, xn, fm, dfm, E] = newton(f_str, x0, Tol, niter, et)
     syms x
     f = str2sym(['@(x)' f_str]);
     df = diff(f);
@@ -17,7 +17,12 @@ function [r, N, xn, fm, dfm, E] = newton(f_str, x0, Tol, niter)
         fe = fm(c+2);
         dfm(c+2) = eval(subs(df, xn(c+2)));
         dfe = dfm(c+2);
-        E(c+2) = abs(xn(c+2) - x0);
+        if strcmp(et, 'Error Absoluto')
+            E(c+2)=abs(xn(c+2)-x0);
+        else
+            E(c+2) = abs(xn(c+2) - x0) / abs(xn(c+2));
+        end
+        %E(c+2) = abs(xn(c+2) - x0);
         error = E(c+2);
         x0 = xn(c+2);
         N(c+2) = c+1;

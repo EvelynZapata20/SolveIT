@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_1.css') }}">
 </head>
+{% extends "base.html" %}
+
 <body>
+  {% block content %}
 
   <div class="table-container">
     <h1>Resultado</h1>
@@ -46,6 +49,6 @@
       </div>
     </div>
   </div>
-      
+  {% endblock %}      
 </body>
 </html>

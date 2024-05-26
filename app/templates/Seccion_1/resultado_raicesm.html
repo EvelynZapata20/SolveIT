@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>Resultados de Múltiples Raíces</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_1.css') }}">
 </head>
+{% extends "base.html" %}
 <body>
+    {% block content %}
     <h1>Resultados de Múltiples Raíces</h1>
     <div class="table-container">
         <table border="1">
@@ -35,6 +37,7 @@
               <img src="{{ imagen_path }}" alt="Imagen">
           </div>
         </div>
-      </div>
+    </div>
+    {% endblock %}
 </body>
 </html>
