@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jacobi Results</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
+    <style>
+        .text-center {
+            text-align: center;
+        }
+        .img-fluid {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="table-container">
@@ -51,7 +62,7 @@
         <div class="row mt-4">
             <div class="col-md-6">
                 <h1>Solución Sistema de Ecuaciones Ax=b</h1>
-                <img src="{{ imagen_path }}" alt="Imagen">
+                <img src="{{ imagen_path }}" alt="Imagen" class="img-fluid">
             </div>
         </div>
     </div>
