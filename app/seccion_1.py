@@ -59,7 +59,8 @@ def biseccion():
         tipe= str(request.form['tipe'])
 
         [r, N, xn, fm, E] = eng.biseccion(f, xi, xs, tol, niter, tipe, nargout=5)
-        N, xn, fm, E = list(N[0]), list(xn[0]), list(fm[0]), list(E[0])
+        if len(N)!=0:
+            N, xn, fm, E = list(N[0]), list(xn[0]), list(fm[0]), list(E[0])
         length = len(N)
 
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_biseccion.csv'))

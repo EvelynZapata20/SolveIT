@@ -13,6 +13,7 @@
       {% block content %}
         <h1>Resultado de Bisección</h1>
         <p>{{ r }}</p>
+        {% if length != 0 %}
         <div class="table-container">
         <table border="1">
             <thead>
@@ -35,11 +36,12 @@
             </tbody>
           </table>
           <br>
+
       <form action="biseccion/descargar" method="post">
           <button type="submit">Descargar</button>
       </form>
     </div>  
-      
+    
     <div class="image-container">
       <div class="row mt-4">
         <div class="col-md 6">
@@ -47,6 +49,7 @@
         </div>
       </div>
     </div>
+    {% endif %}
     {% endblock %}
 </body>
 </html>
