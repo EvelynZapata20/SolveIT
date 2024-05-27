@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jacobi Results</title>
+    <title>Resultado de Jacobi</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
 </head>
 {% extends "base.html" %}
 
 <body>
     {% block content %}
-        <h1>Resultado</h1>
+        <h1>Resultado de Jacobi</h1>
         <p>
             {% for val in xn[-1] %}
             {{ val }}{% if not loop.last %}, {% endif %}

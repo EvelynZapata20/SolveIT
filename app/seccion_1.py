@@ -91,7 +91,7 @@ def multiple_roots():
 
         eng.addpath(dir_matlab)
         # Asume que multiple_roots retorna los valores necesarios o guarda los resultados en un archivo CSV
-        eng.raices_multiples(fn, xi, tol, k, et, nargout=0)  # Ejecuta el cálculo en MATLAB
+        [xi, errores, resultado] = eng.raices_multiples(fn, xi, tol, k, et, nargout=3)  # Ejecuta el cálculo en MATLAB
         
         # Lee los resultados de un archivo CSV
         df = pd.read_csv(os.path.join(dir_tables, 'multiple_roots_results.csv'))
@@ -101,7 +101,7 @@ def multiple_roots():
 
         imagen_path = os.path.join('static', 'grafica_multiple_roots.png')
 
-        return render_template('Seccion_1/resultado_raicesm.html', data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_raicesm.html', data=data, imagen_path=imagen_path, resultado=resultado)
     
     return render_template('Seccion_1/formulario_raicesm.html')
 
