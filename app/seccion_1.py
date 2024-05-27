@@ -199,11 +199,11 @@ def newton():
         et = str(request.form['et'])
 
         eng.addpath(dir_matlab)
-        [r, N, xn, fm, dfm, E] = eng.newton(f, x, tol, niter, et, nargout=6)
+        [r, N, xn, fm, dfm, E, c] = eng.newton(f, x, tol, niter, et, nargout=7)
         N, xn, fm, dfm, E = list(N[0]), list(xn[0]), list(fm[0]), list(dfm[0]), list(E[0])
         length = len(N)
 
-
+        print(c)
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_newton.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
@@ -215,7 +215,7 @@ def newton():
 
         #Gráfica
         imagen_path = '../static/grafica_newton.png'  # Ruta de la imagen
-        return render_template('Seccion_1/resultado_newton.html', r=r, N=N, xn=xn, fm=fm, dfm=dfm, E=E, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_1/resultado_newton.html', r=r, N=N, xn=xn, fm=fm, dfm=dfm, E=E, length=length, data=data, imagen_path=imagen_path, c=c, niter=niter)
     
     return render_template('Seccion_1/formulario_newton.html')
 

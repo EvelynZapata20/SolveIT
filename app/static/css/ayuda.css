@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.2;
+    background-color: #ECF0F1;
+    color: #34495E;
+}
+
+h1{
+    font-size: xx-large;
+    margin-bottom: 25px;
+    color: #34495E;
+    text-align: center;
+}
+
+details {
+    background: #1ABC9C;
+    padding: .5rem;
+    border-radius: 6px;
+    margin: .5rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+summary {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos dentro de summary */
+}
+
+.icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 1rem;
+}
+
+details summary .icon {
+    background-image: url('../flecha-abajo.png');
+    width: 11px;
+    height: 11px;
+}
+
+details[open] summary .icon {
+    background-image: url('../flecha-arriba.png');
+    width: 16px;
+    height: 16px;
+}
+
+ul {
+    list-style-type: disc; /* Asegura que las listas tengan viñetas */
+    padding-left: 20px; /* Añade espacio antes de las viñetas */
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+li{
+    margin-bottom: 15px;
+    color: #FFFFFF;
+}
+
+.form-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}

@@ -28,7 +28,7 @@ def gaussSeidel():
         
 
         eng.addpath(dir_matlab)
-        [r, N, xn, E, re] = eng.gaussSeidel(x ,A ,b ,et ,tol ,niter , nargout=5)
+        [r, N, xn, E, re, c] = eng.gaussSeidel(x ,A ,b ,et ,tol ,niter , nargout=6)
         N, E = list(N[0]), list(E[0])
         length = len(N)
 
@@ -44,7 +44,7 @@ def gaussSeidel():
 
         #Gráfica
         imagen_path = '../static/grafica_gaussSeidel.png'  # Ruta de la imagen
-        return render_template('Seccion_2/resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, Re=re, length=length, data=data, imagen_path=imagen_path)
+        return render_template('Seccion_2/resultado_gaussSeidel.html', r=r, N=N, xn=xn, E=E, Re=re, length=length, data=data, imagen_path=imagen_path, c=c, niter=niter)
     
     return render_template('Seccion_2/formulario_gaussSeidel.html')
 

@@ -16,6 +16,10 @@ app.register_blueprint(seccion_3.blueprint)
 def home():
     return render_template('home.html')
 
+@app.route('/ayuda')
+def ayuda():
+    return render_template('ayuda.html')
+
 # EJECUCIÓN
 if __name__ == '__main__':
     app.run(debug=True)

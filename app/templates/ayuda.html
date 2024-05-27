@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayudas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ayuda.css') }}">
+</head>
+{% extends "base.html" %}
+{% block content %}
+<body>
+    
+    <div class="form-container">
+        <h1>Centro de Ayudas</h1>
+        <details>
+            <summary>
+                <span class="icon"></span>
+                General
+            </summary>
+            <div>
+                <ul>
+                    <li>En nuestro programa, la cadena que proporcionas se analiza y evalúa por medio de <a href="https://la.mathworks.com/products/matlab.html">MATLAB</a>. <br> Asegúrate de que la cadena o función proporcinada respete la sintaxis de la plataforma. <br> Descubre cómo trabajar con los operadores disponibles <a href="https://la.mathworks.com/help/matlab/arithmetic.html?s_tid=CRUX_lftnav">aquí</a>.</li>
+                    <li>En los métodos que piden Tolerancia, esta debe ser positiva.</li>
+                    <li>En los métodos que piden número de iteraciones, este debe ser positivo.</li>
+                </ul>
+            </div>
+        </details>
+        <details>
+            <summary>
+                <span class="icon"></span>
+                Sección 1
+            </summary>
+            <div>
+                <ul>
+                    <li>Asegúrate de que la función proporcionada contenga una raíz.</li>
+                    <li>La función debe ser continua y diferenciable.</li>
+                    <li>En el método de bisección, el valor de xi debe ser menor al de xs, además de que estos dos valores deben <br>existir en la función.</li>
+                    <li>En el método de raíces múltiples, asegúrate de que las derivadas de la función sean correctas.</li>
+                </ul>
+            </div>
+        </details>
+        <details>
+            <summary>
+                <span class="icon"></span>
+                Sección 2
+            </summary>
+            <div>
+                <ul>
+                    <li>El determinante de la matriz debe ser diferente de 0. Averigua el determinante de tu matriz <a href="https://matrixcalc.org/es/det.html">aquí</a>.</li>
+                    <li>La matriz no debe tener 0's en la diagonal principal.</li>
+                    <li>En SOR, si w=1, este trabajará como el método de Gauss-Seidel.</li>
+                    <li>En SOR, si 0&lt;w&lt;1, se obtienen métodos de sub-relajación (Se emplean para obtener la convergencia de algunos sistemas que no son convergentes por Gauss-Seidel)</li>
+                    <li>En SOR, si 1&lt;w&lt;2, se obtienen método de sobre-relajación (Se emplean para acelerar la convergencia de algunos sistemas que son convergentes pero lentos en Gauss-Seidel)</li>
+                </ul>
+            </div>
+        </details>
+        <details>
+            <summary>
+                <span class="icon"></span>
+                Sección 3
+            </summary>
+            <div>
+                <ul>
+                    <li>El vector X o el vector Y no pueden tener valores repetidos.</li>
+                </ul>
+            </div>
+        </details>
+    </div>
+    
+</body>
+{% endblock %}
+</html>

@@ -37,17 +37,19 @@
   </form>
   </div>
   
-  <div class="result-container">
-    <h1>Solución Sistema de Ecuaciones Ax=b</h1>
-    <div class="image-container">
-      <div class="row mt-4">
-        <div class="col-md 6">
-            <img src="{{ imagen_path }}" alt="Imagen">
-            <p>{{Re}}</p>
+  {% if c < niter %}
+    <div class="result-container">
+      <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+      <div class="image-container">
+        <div class="row mt-4">
+          <div class="col-md 6">
+              <img src="{{ imagen_path }}" alt="Imagen">
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endif %}
+  <p>{{Re}}</p>
   {% endblock %}
       
 </body>

@@ -1,4 +1,4 @@
-function [r, N, xn, E, re] = gaussSeidel(x0, A, b, et, Tol, niter)
+function [r, N, xn, E, re, c] = gaussSeidel(x0, A, b, et, Tol, niter)
     disp(x0)
     disp(A)
     disp(b)
@@ -34,6 +34,7 @@ function [r, N, xn, E, re] = gaussSeidel(x0, A, b, et, Tol, niter)
         re = sprintf('Radio espectral de T= %f\n',Re)
         r = sprintf('%s Es una aproximación de la solución del sistema con una tolerancia= %f\n',xn{c}, Tol)
     else 
+        re = sprintf('Radio espectral de T= %f\n',Re)
         r = sprintf('Fracasó en %f iteraciones\n', niter) 
     end
 

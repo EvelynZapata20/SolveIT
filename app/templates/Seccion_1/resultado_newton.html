@@ -42,13 +42,15 @@
       </form>
   </div>
   
-  <div class="image-container">
-    <div class="row mt-4">
-      <div class="col-md 6">
-          <img src="{{ imagen_path }}" alt="Imagen">
+  {% if c < niter %}
+    <div class="image-container">
+      <div class="row mt-4">
+        <div class="col-md 6">
+            <img src="{{ imagen_path }}" alt="Imagen">
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}  
   {% endblock %}      
 </body>
 </html>
