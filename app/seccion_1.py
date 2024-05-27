@@ -21,8 +21,8 @@ def punto_fijo():
     if request.method == 'POST':
         f = str(request.form['f']) 
         g = str(request.form['g'])
-        x = float(request.form['x'])  
-        tol = float(request.form['tol'])
+        x = float(request.form['x'].replace(',', '.'))  
+        tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
         tipe= str(request.form['tipe'])
         
@@ -52,9 +52,9 @@ def descargar_archivo_pf():
 def biseccion():
     if request.method == 'POST':
         f = str(request.form['f']) 
-        xi = float(request.form['xi'])
-        xs = float(request.form['xs'])  
-        tol = float(request.form['tol'])
+        xi = float(request.form['xi'].replace(',', '.'))
+        xs = float(request.form['xs'].replace(',', '.'))  
+        tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
         tipe= str(request.form['tipe'])
 
@@ -84,8 +84,8 @@ def descargar_archivo_biseccion():
 def multiple_roots():
     if request.method == 'POST':
         fn = str(request.form['fn'])
-        xi = float(request.form['xi'])
-        tol = float(request.form['tol'])
+        xi = float(request.form['xi'].replace(',', '.'))
+        tol = float(request.form['tol'].replace(',', '.'))
         k = int(request.form['k'])
         et = str(request.form['et'])
 
@@ -116,9 +116,9 @@ def descargar_archivo_raicesm():
 def secante():
     if request.method == 'POST':
         f= str(request.form['f']) 
-        x0 = float(request.form['x0'])
-        x1 = float(request.form['x1'])  
-        tol = float(request.form['tol'])
+        x0 = float(request.form['x0'].replace(',', '.'))
+        x1 = float(request.form['x1'].replace(',', '.'))  
+        tol = float(request.form['tol'].replace(',', '.'))
         Terror = str(request.form['Terror'])
         niter = int(request.form['niter'])
         
@@ -154,9 +154,9 @@ def descargar_archivo():
 def reglaFalsa():
     if request.method == 'POST':
         f= str(request.form['f']) 
-        x0 = float(request.form['x0'])
-        x1 = float(request.form['x1'])  
-        tol = float(request.form['tol'])
+        x0 = float(request.form['x0'].replace(',', '.'))
+        x1 = float(request.form['x1'].replace(',', '.'))  
+        tol = float(request.form['tol'].replace(',', '.'))
         Terror = str(request.form['Terror'])
         niter = int(request.form['niter'])
         
@@ -192,8 +192,8 @@ def descargar_archivorf():
 def newton():
     if request.method == 'POST':
         f= str(request.form['f']) 
-        x = float(request.form['x'])  
-        tol = float(request.form['tol'])
+        x = float(request.form['x'].replace(',', '.'))  
+        tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
         et = str(request.form['et'])
 

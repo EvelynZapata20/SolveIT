@@ -1,7 +1,7 @@
 %Spline: Calcula los coeficienetes de los polinomios de interpolación de
 % grado d (1, 2, 3) para el conjunto de n datos (x,y), 
 % mediante el método spline.
-function [Tabla] = Spline(x,y,d)
+function [Tabla] = spline(x,y,d)
     x = eval(x);
     y = eval(y);
     n=length(x);

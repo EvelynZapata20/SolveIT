@@ -116,7 +116,7 @@ function [sizee, const] = calculate(b)
         case 5
             sizee = 4.2; 
             const = 0.11;   
-        case 6
+        case {6, 7, 8}
             sizee = 4.6; 
             const = 0.105;  
     end

@@ -23,7 +23,7 @@ def gaussSeidel():
         b = str(request.form['b'])  
         x = str(request.form['x']) 
         et = str(request.form['et']) 
-        tol = float(request.form['tol'])
+        tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
         
 
@@ -64,7 +64,7 @@ def jacobi():
         b = str(request.form['b'])  
         x = str(request.form['x']) 
         error_type = str(request.form['error_type']) 
-        tol = float(request.form['tol'])
+        tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
         
 
@@ -101,9 +101,9 @@ def sor():
         x0 = str(request.form['x'])
         A = request.form['A']
         b = str(request.form['b'])
-        Tol = float(request.form['tol'])
+        Tol = float(request.form['tol'].replace(',', '.'))
         niter = int(request.form['niter'])
-        w = float(request.form['w'])
+        w = float(request.form['w'].replace(',', '.'))
         tipe = str(request.form['et']) 
         
         eng.addpath(dir_matlab)
