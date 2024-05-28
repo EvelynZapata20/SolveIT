@@ -116,7 +116,7 @@ def sor():
         eng.addpath(dir_matlab)
         # Llamar a la función SOR
         [r, n, xi, E, radio] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=5)
-        if not np.isnan(xi[0]):
+        if not np.isnan(xi[0][0]):
             n, E = list(n[0]), list(E[0])
             length = len(n)
         else:

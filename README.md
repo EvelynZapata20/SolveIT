@@ -1,1 +1,1 @@
-Para ejecutar en local: flask --app app.metodos --debug  run
+Para ejecutar en local: flask --app app.app --debug  run
