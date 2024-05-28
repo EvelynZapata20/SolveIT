@@ -14,31 +14,31 @@
         <p>Ingrese los datos para calcular las raíces múltiples</p>
         <form action="/multiple_roots" method="post">
             <div>
-                <label for="fn">Función, fn:</label>
+                <label for="fn">Función fn:</label>
                 <input type="text" id="fn" name="fn" required>
             </div>
             
             <div>
-                <label for="xi">Valor inicial, xi:</label>
+                <label for="xi">Valor inicial (xi):</label>
                 <input type="text" id="xi" name="xi" required>
             </div>
-            
+                       
             <div>
-                <label for="tol">Tolerancia:</label>
-                <input type="text" id="tol" name="tol" required>
-            </div>
-            
-            <div>
-                <label for="k">Número máximo de iteraciones:</label>
+                <label for="k">Nº máximo de Iteraciones:</label>
                 <input type="text" id="k" name="k" required>
             </div>
             
             <div>
-                <label for="et">Tipo de error:</label>
+                <label for="et">Tipo de Tolerancia:</label>
                 <select id="et" name="et">
                     <option value="Decimales Correctos">Decimales Correctos</option>
                     <option value="Cifras Significativas">Cifras Significativas</option>
                 </select>
+            </div>
+
+            <div>
+                <label for="tol">Tolerancia:</label>
+                <input type="text" id="tol" name="tol" required>
             </div>
             
             <input type="submit" value="Calcular">

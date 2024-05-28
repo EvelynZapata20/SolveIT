@@ -18,36 +18,36 @@
     <form action="/secante" method="post">
 
         <div>
-            <label for="f">f:</label>
+            <label for="f">Función f:</label>
             <input type="text" id="f" name="f">
+        </div>
+
+        <div>
+            <label for="niter">Nº máximo de Iteraciones:</label>
+            <input type="text" id="niter" name="niter">
         </div>
         
         <div>
-            <label for="xi">xi:</label>
+            <label for="xi">Límite inferior del intérvalo (xi):</label>
             <input type="text" id="g" name="x0">
         </div>
         
         <div>
-            <label for="xs">xs:</label>
+            <label for="xs">Límite superior del intérvalo (xs):</label>
             <input type="text" id="x" name="x1">
         </div>
-        
-        <div>
-            <label for="tol">Tolerancia:</label>
-            <input type="text" id="tol" name="tol">
-        </div>
-        
-        <div>
-            <label for="niter">Nº Iteraciones:</label>
-            <input type="text" id="niter" name="niter">
-        </div>
-        
+                
         <div>
             <label for="Terror">Tipo de Tolerancia:</label>
             <select id="Terror" name="Terror">
                 <option value="Decimales Correctos">Decimales Correctos</option>
                 <option value="Cifras Significativas">Cifras Significativas</option>
             </select>
+        </div>
+
+        <div>
+            <label for="tol">Tolerancia:</label>
+            <input type="text" id="tol" name="tol">
         </div>
 
         <input type="submit" value="Enviar">

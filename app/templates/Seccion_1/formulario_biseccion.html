@@ -15,28 +15,23 @@
         <p>Por favor, ingrese los siguientes datos:</p>
         <form action="/biseccion" method="post">
             <div>
-                <label for="f">f:</label>
+                <label for="f">Función f:</label>
                 <input type="text" id="f" name="f">
             </div>
-            
+                       
             <div>
-                <label for="xi">xi:</label>
+                <label for="niter">Nº máximo de Iteraciones:</label>
+                <input type="text" id="niter" name="niter">
+            </div>
+
+            <div>
+                <label for="xi">Límite inferior del intérvalo (xi):</label>
                 <input type="text" id="xi" name="xi">
             </div>
             
             <div>
-                <label for="xs">xs:</label>
+                <label for="xs">Límite superior del intérvalo (xs):</label>
                 <input type="text" id="xs" name="xs">
-            </div>
-            
-            <div>
-                <label for="tol">Tolerancia:</label>
-                <input type="text" id="tol" name="tol">
-            </div>
-            
-            <div>
-                <label for="niter">Nº Iteraciones:</label>
-                <input type="text" id="niter" name="niter">
             </div>
             
             <div>
@@ -45,6 +40,11 @@
                     <option value="Decimales Correctos">Decimales Correctos</option>
                     <option value="Cifras Significativas">Cifras Significativas</option>
                 </select>
+            </div>
+
+            <div>
+                <label for="tol">Tolerancia:</label>
+                <input type="text" id="tol" name="tol">
             </div>
 
             <input type="submit" value="Enviar">
