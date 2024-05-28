@@ -16,128 +16,156 @@
 <body class="container mt-6">
     {% extends "base.html" %}
     {% block content %}
-    <div class= "form-container">
+    <div class="form-container">
 
-    <h1 class="text-center">Metodo de interpolación de Lagrange</h1>
-    
-    <p></p>
-    <p>Debes ingresar por lo menos dos puntos para la ejecución de este método</p>
-    <p>Nota: Intenta no utilizar puntos repetidos ya que esto podría generar resultados inesperados en el polinomio</p>
+        <h1 class="text-center">Método de interpolación de Lagrange</h1>
 
-    <!-- Formulario para definir el tamaño de la matriz -->
-    <div class="form">
-    <form id="tamanioForm" class="form-inline mb-3">
-        <div class="form-group mr-2">
-            <label for="filas" class="mr-2">Cantidad de datos:</label>
-            <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" class="form-control" required>
+        <p></p>
+        <p>Debes ingresar por lo menos dos puntos para la ejecución de este método</p>
+        <p>Nota: Intenta no utilizar puntos repetidos ya que esto podría generar resultados inesperados en el polinomio
+        </p>
+
+        <!-- Formulario para definir el tamaño de la matriz -->
+        <div class="form">
+            <form id="tamanioForm" class="form-inline mb-3">
+                <div class="form-group mr-2">
+                    <label for="filas" class="mr-2">Cantidad de datos:</label>
+                    <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" class="form-control" required>
+                </div>
+                <button type="button" onclick="generarVectorx(); generarVectory();"
+                    class="btn btn-primary">Generar</button>
+            </form>
         </div>
-        <button type="button" onclick="generarVectorx(); generarVectory();" class="btn btn-primary">Generar</button>
-    </form>
-    </div>
 
-    <div class="row">
-        <div class="coordinate">
-        <div class="col-md-4">
-            <table id="vectorx" class="table table-bordered">
-                <h6>X</h6>
-                <!-- La tabla se generará dinámicamente con JavaScript -->
-            </table>
+        <div class="row">
+            <div class="coordinate">
+                <div class="col-md-4">
+                    <table id="vectorx" class="table table-bordered">
+                        <h6>X</h6>
+                        <!-- La tabla se generará dinámicamente con JavaScript -->
+                    </table>
+                </div>
+            </div>
+            <div class="coordinate">
+                <div class="col-md-4">
+                    <table id="vectory" class="table table-bordered">
+                        <h6>Y</h6>
+                        <!-- La tabla se generará dinámicamente con JavaScript -->
+                    </table>
+                </div>
+            </div>
         </div>
-        </div>  
-        <div class="coordinate">
-        <div class="col-md-4">
-            <table id="vectory" class="table table-bordered">
-                <h6>Y</h6>
-                <!-- La tabla se generará dinámicamente con JavaScript -->
-            </table>
-        </div>
-        </div>
-    </div>
 
-    <button onclick='ejecutarMetodo();' class='btn btn-success'>Ejecutar Método</button>
+        <button onclick='ejecutarMetodo();' class='btn btn-success'>Ejecutar Método</button>
 
-    <div id="respuestaDiv"></div>
+        <div id="respuestaDiv"></div>
 
-    <table class="table table-bordered" id="tablaDatos">
-        <thead>
-            <tr id="encabezado"></tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
- 
-    <script>
-        function generarVectorx() {
-            var filas = parseInt(document.getElementById("cantidadDatos").value);
-            var tabla = document.getElementById("vectorx");
+        <table class="table table-bordered" id="tablaDatos">
+            <thead>
+                <tr id="encabezado"></tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
 
-            // Limpiar la tabla
-            tabla.innerHTML = '';
-            var fila = tabla.insertRow(0);
-            for (var j = 0; j < filas; j++) {
-                var celda = fila.insertCell(j);
-                var input = document.createElement("input");
-                input.type = "number";
-                input.name = "dato[" + j + "]";
-                celda.appendChild(input);
+        <script>
+            function generarVectorx() {
+                var filas = parseInt(document.getElementById("cantidadDatos").value);
+                var tabla = document.getElementById("vectorx");
+
+                // Limpiar la tabla
+                tabla.innerHTML = '';
+                var fila = tabla.insertRow(0);
+                for (var j = 0; j < filas; j++) {
+                    var celda = fila.insertCell(j);
+                    var input = document.createElement("input");
+                    input.type = "number";
+                    input.name = "dato[" + j + "]";
+                    celda.appendChild(input);
+                }
+
             }
 
-        }
+            function generarVectory() {
+                var filas = parseInt(document.getElementById("cantidadDatos").value);
+                var tabla = document.getElementById("vectory");
 
-        function generarVectory() {
-            var filas = parseInt(document.getElementById("cantidadDatos").value);
-            var tabla = document.getElementById("vectory");
-
-            // Limpiar la tabla
-            tabla.innerHTML = '';
-            var fila = tabla.insertRow(0);
-            for (var j = 0; j < filas; j++) {
-                var celda = fila.insertCell(j);
-                var input = document.createElement("input");
-                input.type = "number";
-                input.name = "dato[" + j + "]";
-                celda.appendChild(input);
+                // Limpiar la tabla
+                tabla.innerHTML = '';
+                var fila = tabla.insertRow(0);
+                for (var j = 0; j < filas; j++) {
+                    var celda = fila.insertCell(j);
+                    var input = document.createElement("input");
+                    input.type = "number";
+                    input.name = "dato[" + j + "]";
+                    celda.appendChild(input);
+                }
             }
-        }
 
-
-        // Enviar los datos al servidor
-        function ejecutarMetodo() {
-            // Obtener los datos de los vectores x e y
-            var vectorx = [];
-            var vectory = [];
-            $("#vectorx input").each(function () {
-                vectorx.push(parseFloat($(this).val()));
-            });
-            $("#vectory input").each(function () {
-                vectory.push(parseFloat($(this).val()));
-            });
-
-            // Convertir los vectores a cadenas JSON
-            var vectorxJSON = JSON.stringify(vectorx);
-            var vectoryJSON = JSON.stringify(vectory);
 
             // Enviar los datos al servidor
-            $.ajax({
-                type: "POST",
-                url: "/lagrange",
-                data: {
-                    vectorx: vectorxJSON,
-                    vectory: vectoryJSON
-                },
-                success: function (response) {
-                    // Manejar la respuesta del servidor
-                    $("#respuestaDiv").html(response);
-                },
-                error: function (xhr, status, error) {
-                    // Manejar errores de la solicitud
-                    console.error(error);
-                }
-            });
-        }
+            // Enviar los datos al servidor
+            function ejecutarMetodo() {
+                // Obtener los datos de los vectores x e y
+                var vectorx = [];
+                var vectory = [];
+                var camposVacios = false; // Bandera para indicar si hay campos vacíos
 
-    </script>
-    {% endblock %}
+                $("#vectorx input").each(function () {
+                    var valor = $(this).val();
+                    if (valor === "") {
+                        camposVacios = true;
+                        return false; // Salir del bucle si se encuentra un campo vacío
+                    }
+                    vectorx.push(parseFloat(valor));
+                });
+
+                if (camposVacios) {
+                    // Mostrar mensaje de error o realizar la acción correspondiente
+                    alert("Por favor, completa todos los campos del vector X.");
+                    return; // Detener la ejecución si hay campos vacíos
+                }
+
+                $("#vectory input").each(function () {
+                    var valor = $(this).val();
+                    if (valor === "") {
+                        camposVacios = true;
+                        return false; // Salir del bucle si se encuentra un campo vacío
+                    }
+                    vectory.push(parseFloat(valor));
+                });
+
+                if (camposVacios) {
+                    // Mostrar mensaje de error o realizar la acción correspondiente
+                    alert("Por favor, completa todos los campos del vector Y.");
+                    return; // Detener la ejecución si hay campos vacíos
+                }
+
+                // Convertir los vectores a cadenas JSON
+                var vectorxJSON = JSON.stringify(vectorx);
+                var vectoryJSON = JSON.stringify(vectory);
+
+                // Enviar los datos al servidor
+                $.ajax({
+                    type: "POST",
+                    url: "/lagrange",
+                    data: {
+                        vectorx: vectorxJSON,
+                        vectory: vectoryJSON
+                    },
+                    success: function (response) {
+                        // Manejar la respuesta del servidor
+                        $("#respuestaDiv").html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar errores de la solicitud
+                        console.error(error);
+                    }
+                });
+            }
+
+        </script>
+        {% endblock %}
 </body>
 
 </html>

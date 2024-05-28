@@ -103,38 +103,63 @@
 
         // Enviar los datos al servidor
         function ejecutarMetodo() {
-            // Obtener los datos de los vectores x e y
-            var vectorx = [];
-            var vectory = [];
-            $("#vectorx input").each(function () {
-                vectorx.push(parseFloat($(this).val()));
-            });
-            $("#vectory input").each(function () {
-                vectory.push(parseFloat($(this).val()));
-            });
+                // Obtener los datos de los vectores x e y
+                var vectorx = [];
+                var vectory = [];
+                var camposVacios = false; // Bandera para indicar si hay campos vacíos
 
-            // Convertir los vectores a cadenas JSON
-            var vectorxJSON = JSON.stringify(vectorx);
-            var vectoryJSON = JSON.stringify(vectory);
+                $("#vectorx input").each(function () {
+                    var valor = $(this).val();
+                    if (valor === "") {
+                        camposVacios = true;
+                        return false; // Salir del bucle si se encuentra un campo vacío
+                    }
+                    vectorx.push(parseFloat(valor));
+                });
 
-            // Enviar los datos al servidor
-            $.ajax({
-                type: "POST",
-                url: "/vandermonde",
-                data: {
-                    vectorx: vectorxJSON,
-                    vectory: vectoryJSON
-                },
-                success: function (response) {
-                    // Manejar la respuesta del servidor
-                    $("#respuestaDiv").html(response);
-                },
-                error: function (xhr, status, error) {
-                    // Manejar errores de la solicitud
-                    console.error(error);
+                if (camposVacios) {
+                    // Mostrar mensaje de error o realizar la acción correspondiente
+                    alert("Por favor, completa todos los campos del vector X.");
+                    return; // Detener la ejecución si hay campos vacíos
                 }
-            });
-        }
+
+                $("#vectory input").each(function () {
+                    var valor = $(this).val();
+                    if (valor === "") {
+                        camposVacios = true;
+                        return false; // Salir del bucle si se encuentra un campo vacío
+                    }
+                    vectory.push(parseFloat(valor));
+                });
+
+                if (camposVacios) {
+                    // Mostrar mensaje de error o realizar la acción correspondiente
+                    alert("Por favor, completa todos los campos del vector Y.");
+                    return; // Detener la ejecución si hay campos vacíos
+                }
+
+                // Convertir los vectores a cadenas JSON
+                var vectorxJSON = JSON.stringify(vectorx);
+                var vectoryJSON = JSON.stringify(vectory);
+
+                // Enviar los datos al servidor
+                $.ajax({
+                    type: "POST",
+                    url: "/vandermonde",
+                    data: {
+                        vectorx: vectorxJSON,
+                        vectory: vectoryJSON
+                    },
+                    success: function (response) {
+                        // Manejar la respuesta del servidor
+                        $("#respuestaDiv").html(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar errores de la solicitud
+                        console.error(error);
+                    }
+                });
+            }
 
     </script>
     {% endblock %}

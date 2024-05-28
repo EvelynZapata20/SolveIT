@@ -11,6 +11,7 @@
     {% block content %}
     <h1>Resultado de Secante</h1>
     <p>Respuesta: {{ respuesta }}</p>
+    {% if respuesta != "El intervalo es inadecuado" %}
     <h2>Tabla de Resultados</h2>
     <table border="1">
         <thead>
@@ -43,6 +44,7 @@
     <form action="secante/descargar" method="post">
         <button type="submit">Descargar</button>
     </form>
+    {% endif %}
     {% endblock %}
 </body>
 </html>
