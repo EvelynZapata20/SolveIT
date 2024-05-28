@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import matlab.engine
 
 import app.seccion_1 as seccion_1
 import app.seccion_2 as seccion_2
@@ -19,6 +20,26 @@ def home():
 @app.route('/ayuda')
 def ayuda():
     return render_template('ayuda.html')
+
+
+@app.route('/derivar', methods=['POST'])
+def derivar():
+    function_str = request.form['function']
+    try:
+        function_str = function_str.replace("'", "''")
+        eng = matlab.engine.start_matlab()
+        cmd = f"syms x; fn = str2sym('{function_str}'); df = diff(fn, x); df_str = char(df);"
+        eng.eval(cmd, nargout=0)
+
+        derivative = eng.workspace['df_str']
+        
+        eng.quit()
+        
+        result = str(derivative)
+    except Exception as e:
+        result = f"Error: {e}"
+    return render_template('ayuda.html', result=result)
+
 
 # EJECUCIÓN
 if __name__ == '__main__':

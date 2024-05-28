@@ -65,6 +65,21 @@
                 </ul>
             </div>
         </details>
+
+        <div class= "derivative-container">       
+            <p class= "p-n">¿Necesitas la derivada de una función?</p>
+            <form id="derivative-form" action="/derivar" method="POST">
+                <label for="function-input">Ingresa la función aquí:</label>
+                <input type="text" id="function-input" name="function" required>
+                <button type="submit">Derivar</button>
+            </form>
+            <div id="result">
+                {% if result %}
+                    <p class= "p-n">Resultado:</p>
+                    <p>{{ result }}</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
     
 </body>
