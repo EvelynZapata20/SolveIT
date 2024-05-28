@@ -12,11 +12,14 @@
     {% block content %}
         <h1>Resultado de Jacobi</h1>
         <p>
+            {%if length != 0%}
             {% for val in xn[-1] %}
             {{ val }}{% if not loop.last %}, {% endif %}
             {% endfor %}
+            {% endif %}
             {{ r }}
         </p>
+        {%if length != 0%}
         <div class="table-container">
         <table>
             <thead>
@@ -60,6 +63,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endblock %}
 </body>
 </html>

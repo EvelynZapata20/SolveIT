@@ -32,7 +32,6 @@ def gaussSeidel():
         N, E = list(N[0]), list(E[0])
         length = len(N)
 
-
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_gaussSeidel.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
@@ -70,9 +69,11 @@ def jacobi():
 
         eng.addpath(dir_matlab)
         [r, N, xn, E, Re] = eng.jacobi(x ,A ,b , tol ,niter , error_type, nargout=5)
-        N, E = list(N[0]), list(E[0])
-        length = len(N)
-
+        if not np.isnan(xn[0][0]):
+            N, E = list(N[0]), list(E[0])
+            length = len(N)
+        else:
+            length = 0
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_jacobi.csv'))
         df = df.astype(str)
         data = df.to_dict(orient='records')
@@ -81,7 +82,6 @@ def jacobi():
         imagen_path = os.path.join('static', 'grafica_jacobi.png')
 
         return render_template('Seccion_2/resultado_jacobi.html', r=r, N=N, xn=xn, E=E, Re=Re, length=length, data=data, imagen_path=imagen_path)
-    
     return render_template('Seccion_2/formulario_jacobi.html')
 
 
@@ -109,9 +109,14 @@ def sor():
         eng.addpath(dir_matlab)
         # Llamar a la función SOR
         [r, n, xi, E, radio] = eng.SOR(x0, A, b, Tol, niter, w, tipe, nargout=5)
-        n, E = list(n[0]), list(E[0])
+        if not np.isnan(xi[0]):
+            n, E = list(n[0]), list(E[0])
+            length = len(n)
+        else:
+            length = 0
+
         xi = [[xi[j][i] for j in range(len(xi))] for i in range(len(xi[0]))]
-        length = len(n)
+        
 
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_sor.csv'))
         df = df.astype(str)
