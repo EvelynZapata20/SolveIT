@@ -1,6 +1,8 @@
 function [r, N, xn, fm, E] = biseccion(f_str, xi, xs, Tol, niter, tipe)
     % Convertir la cadena de la función a una función manejable
-    f = str2func(['@(x)' f_str]);
+    syms x;
+    fn = str2sym(f_str);
+    f = matlabFunction(fn);
 
     % Evaluar la función en los extremos del intervalo
     fi = f(xi);
