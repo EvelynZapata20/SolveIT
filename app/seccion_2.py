@@ -29,8 +29,15 @@ def gaussSeidel():
 
         eng.addpath(dir_matlab)
         [r, N, xn, E, re, c] = eng.gaussSeidel(x ,A ,b ,et ,tol ,niter , nargout=6)
-        N, E = list(N[0]), list(E[0])
-        length = len(N)
+        if isinstance(E, float):
+            if np.isnan(E):
+                length = 0
+            else:
+               N, E = list(N[0]), list(E[0])
+               length = len(N)      
+        else:
+            N, E = list(N[0]), list(E[0])
+            length = len(N) 
 
         df = pd.read_csv(os.path.join(dir_tables, 'tabla_gaussSeidel.csv'))
         df = df.astype(str)

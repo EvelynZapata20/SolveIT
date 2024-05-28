@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado de Gauss-Seidel</title>
+    <title>Resultado</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/resultado_2.css') }}">
 </head>
 {% extends "base.html" %}
@@ -12,45 +12,47 @@
     {% block content %}
     <h1>Resultado de Gauss-Seidel</h1>
     <p>{{r}}</p>
-    <div class="table-container">
-    <table border="1">
-      <thead>
-        <tr>
-          <th>N</th>
-          <th>xn</th>
-          <th>E</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for i in range(length) %}
+    {% if length != 0 %}
+      <div class="table-container">
+      <table border="1">
+        <thead>
           <tr>
-              <td>{{ N[i] }}</td>
-              <td>{{ xn[i] }}</td>
-              <td>{{ E[i] }}</td>
+            <th>N</th>
+            <th>xn</th>
+            <th>E</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <br>
-    <form action="gaussSeidel/descargar" method="post">
-      <button type="submit">Descargar</button>
-  </form>
-  </div>
-  
-  {% if c < niter %}
-    <div class="result-container">
-      <h1>Solución Sistema de Ecuaciones Ax=b</h1>
-      <div class="image-container">
-        <div class="row mt-4">
-          <div class="col-md 6">
-              <img src="{{ imagen_path }}" alt="Imagen">
+        </thead>
+        <tbody>
+          {% for i in range(length) %}
+            <tr>
+                <td>{{ N[i] }}</td>
+                <td>{{ xn[i] }}</td>
+                <td>{{ E[i] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <form action="gaussSeidel/descargar" method="post">
+        <button type="submit">Descargar</button>
+    </form>
+    </div>
+    
+    {% if c < niter %}
+      <div class="result-container">
+        <h1>Solución Sistema de Ecuaciones Ax=b</h1>
+        <div class="image-container">
+          <div class="row mt-4">
+            <div class="col-md 6">
+                <img src="{{ imagen_path }}" alt="Imagen">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  {% endif %}
-  <p>{{Re}}</p>
+    {% endif %}
+    <p>{{Re}}</p>
+  {% endif %}     
   {% endblock %}
-      
+   
 </body>
 </html>
